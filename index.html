@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closing Actuariel · Tableau de bord</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* Palette éditoriale institutionnelle */
+  --bg: #faf8f5;
+  --bg-elev: #ffffff;
+  --bg-accent: #f0ece5;
+  --ink: #0f1e3a;
+  --ink-soft: #3a4660;
+  --ink-mute: #6b7387;
+  --line: #d8d2c4;
+  --line-soft: #ebe5d6;
+  --bleu: #1f3864;
+  --bleu-clair: #4a6fa5;
+  --rouge: #a23226;
+  --vert: #2d6a3e;
+  --or: #b08433;
+  --accent: #1f3864;
+
+  --serif: "Source Serif 4", "Times New Roman", serif;
+  --sans: "IBM Plex Sans", -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ========================================================================== */
+/* HEADER ÉDITORIAL                                                            */
+/* ========================================================================== */
+
+.masthead{
+  border-bottom: 3px double var(--ink);
+  padding: 1.5rem 3rem 1rem;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+.masthead-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 0.5rem;
+}
+.masthead-title{
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.masthead-sub{
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  margin-top: 0.4rem;
+}
+.masthead-meta{
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ========================================================================== */
+/* NAVIGATION DES MODULES                                                      */
+/* ========================================================================== */
+
+nav.modules{
+  display: flex;
+  gap: 0;
+  padding: 0 3rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 130px;
+  z-index: 49;
+  overflow-x: auto;
+}
+nav.modules button{
+  flex: 1;
+  min-width: 140px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 1rem 0.6rem;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+nav.modules button:hover{
+  color: var(--ink);
+  background: var(--bg-accent);
+}
+nav.modules button.active{
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: var(--bg-elev);
+}
+nav.modules button .mod-num{
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-mute);
+  letter-spacing: 0.15em;
+  margin-bottom: 2px;
+}
+nav.modules button.active .mod-num{ color: var(--accent); }
+
+/* ========================================================================== */
+/* PANELS DE CONTENU                                                           */
+/* ========================================================================== */
+
+main{ padding: 3rem; max-width: 1400px; margin: 0 auto; }
+.panel{ display: none; animation: fadeIn 0.4s ease; }
+.panel.active{ display: block; }
+@keyframes fadeIn{
+  from{ opacity: 0; transform: translateY(8px); }
+  to  { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header{
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.panel-tag{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.panel-title{
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.6rem;
+}
+.panel-lede{
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  max-width: 70ch;
+  line-height: 1.5;
+}
+
+/* ========================================================================== */
+/* GRILLES & CARTES                                                            */
+/* ========================================================================== */
+
+.grid{ display:grid; gap:1.5rem; }
+.grid-3{ grid-template-columns: repeat(3, 1fr); }
+.grid-4{ grid-template-columns: repeat(4, 1fr); }
+.grid-2{ grid-template-columns: 1fr 1fr; }
+.grid-2-asym{ grid-template-columns: 1fr 2fr; }
+@media (max-width: 700px){
+  .grid-3, .grid-4, .grid-2, .grid-2-asym{ grid-template-columns: 1fr; }
+}
+@media (max-width: 1000px) and (min-width: 701px){
+  .grid-4{ grid-template-columns: repeat(2, 1fr); }
+  .grid-3{ grid-template-columns: repeat(2, 1fr); }
+}
+
+.kpi{
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: 1.5rem 1.5rem 1.2rem;
+  position: relative;
+}
+.kpi-label{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 0.5rem;
+}
+.kpi-value{
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.kpi-unit{
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink-mute);
+  margin-left: 0.2rem;
+}
+.kpi-detail{
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dotted var(--line);
+}
+.kpi.kpi-warn{ border-left: 4px solid var(--rouge); }
+.kpi.kpi-ok  { border-left: 4px solid var(--vert); }
+.kpi.kpi-bleu{ border-left: 4px solid var(--accent); }
+.kpi.kpi-or  { border-left: 4px solid var(--or); }
+.kpi-value.is-neg{ color: var(--rouge); }
+.kpi-value.is-pos{ color: var(--vert); }
+
+/* ========================================================================== */
+/* TABLEAUX                                                                    */
+/* ========================================================================== */
+
+.table-wrap{
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+table.data{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+table.data th{
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.7rem 0.8rem;
+  text-align: left;
+}
+table.data th:not(:first-child){ text-align: right; }
+table.data td{
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid var(--line-soft);
+  font-variant-numeric: tabular-nums;
+}
+table.data td:not(:first-child){ text-align: right; font-family: var(--mono); font-size: 12px; }
+table.data tr:nth-child(even) td{ background: rgba(0,0,0,0.015); }
+table.data tr.tot td{
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  font-weight: 600;
+  background: var(--bg-accent) !important;
+}
+table.data td.is-neg{ color: var(--rouge); font-weight: 500; }
+table.data td.is-pos{ color: var(--vert); font-weight: 500; }
+.badge{
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.badge.ok{ background: var(--vert); color: #fff; }
+.badge.alert{ background: var(--rouge); color: #fff; }
+
+/* ========================================================================== */
+/* ENCADRÉS PÉDAGOGIQUES                                                       */
+/* ========================================================================== */
+
+.callout{
+  margin: 2rem 0;
+  padding: 1.5rem 1.8rem;
+  background: var(--bg-elev);
+  border-left: 4px solid var(--accent);
+  font-family: var(--serif);
+  position: relative;
+}
+.callout-tag{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.callout-tag::before{
+  content: "§ ";
+  opacity: 0.6;
+}
+.callout-body{
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.callout.warn{ border-left-color: var(--rouge); }
+.callout.warn .callout-tag{ color: var(--rouge); }
+
+/* ========================================================================== */
+/* TYPOGRAPHIE DE CORPS                                                        */
+/* ========================================================================== */
+
+h3.section{
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: -0.01em;
+}
+p.body{
+  margin: 0.8rem 0;
+  max-width: 75ch;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.65;
+}
+p.body strong{ color: var(--ink); font-weight: 600; }
+ul.bullets{ margin: 1rem 0 1.2rem 1.2rem; }
+ul.bullets li{
+  margin: 0.4rem 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ========================================================================== */
+/* GRAPHIQUES SVG                                                              */
+/* ========================================================================== */
+
+.chart-card{
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+}
+.chart-card h4{
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.chart-card .chart-sub{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 1rem;
+}
+.chart-svg{
+  width: 100%;
+  height: auto;
+  font-family: var(--sans);
+}
+.chart-svg text{ fill: var(--ink-soft); font-size: 11px; }
+.chart-svg .axis line, .chart-svg .axis path{ stroke: var(--line); stroke-width: 1; }
+.chart-svg .grid line{ stroke: var(--line-soft); stroke-dasharray: 2 2; }
+.chart-svg .label{ font-family: var(--mono); font-size: 10px; fill: var(--ink-mute); }
+
+/* Legende */
+.legend{
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.legend-swatch{
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+
+/* ========================================================================== */
+/* TRIANGLE HEATMAP                                                            */
+/* ========================================================================== */
+
+.triangle-grid{
+  display: grid;
+  grid-template-columns: auto repeat(5, 1fr);
+  gap: 4px;
+  margin: 1.5rem 0;
+}
+.triangle-grid .cell{
+  padding: 0.8rem 0.4rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-soft);
+}
+.triangle-grid .head{
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+.triangle-grid .row-head{
+  background: var(--bg-accent);
+  font-weight: 600;
+}
+.triangle-grid .empty{
+  background: repeating-linear-gradient(
+    45deg, var(--line-soft), var(--line-soft) 4px, transparent 4px, transparent 8px);
+  color: transparent;
+}
+
+/* ========================================================================== */
+/* FOOTER                                                                      */
+/* ========================================================================== */
+
+footer{
+  margin-top: 5rem;
+  padding: 2rem 3rem;
+  border-top: 3px double var(--ink);
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-align: center;
+}
+footer .colophon{
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================================================
+  MASTHEAD
+========================================================================= -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span>Édition 2026 · Vol. I</span>
+    <span>Portefeuille MTPL · Simulation pédagogique</span>
+    <span>Closing au 31/12/2025</span>
+  </div>
+  <h1 class="masthead-title">Closing Actuariel <span style="font-family:var(--serif);font-style:italic;font-weight:300;color:var(--ink-soft)">&amp;</span> Suivi des Risques Techniques</h1>
+  <p class="masthead-sub">Une étude complète d'un portefeuille non-vie : provisionnement, adéquation IFRS 4, boni-mali, compte technique, automatisation BAU.</p>
+  <div class="masthead-meta">
+    <span>50 000 polices</span>
+    <span>5 cohortes</span>
+    <span>6 modules</span>
+    <span>8 scripts Python</span>
+    <span>56 formules Excel · 0 erreur</span>
+  </div>
+</header>
+
+<!-- ========================================================================
+  NAVIGATION
+========================================================================= -->
+<nav class="modules">
+  <button class="active" data-target="overview"><span class="mod-num">§ 00</span>Vue d'ensemble</button>
+  <button data-target="m1"><span class="mod-num">§ M1</span>Simulation</button>
+  <button data-target="m2"><span class="mod-num">§ M2</span>Provisionnement</button>
+  <button data-target="m3"><span class="mod-num">§ M3</span>LAT IFRS 4</button>
+  <button data-target="m4"><span class="mod-num">§ M4</span>Boni-Mali</button>
+  <button data-target="m5"><span class="mod-num">§ M5</span>Compte Technique</button>
+  <button data-target="m6"><span class="mod-num">§ M6</span>Automatisation</button>
+</nav>
+
+<main>
+
+<!-- ========================================================================
+  PANEL : VUE D'ENSEMBLE
+========================================================================= -->
+<section class="panel active" id="overview">
+  <div class="panel-header">
+    <div class="panel-tag">§ 00 · Résumé exécutif</div>
+    <h2 class="panel-title">Vue d'ensemble</h2>
+    <p class="panel-lede">Quatre analyses indépendantes convergent vers le même diagnostic : le segment Particuliers, cohorte 2023, est simultanément sous-provisionné, sous-tarifé et en perte technique.</p>
+  </div>
+
+  <div class="grid grid-4">
+    <div class="kpi kpi-bleu">
+      <div class="kpi-label">Primes acquises</div>
+      <div class="kpi-value">7,23<span class="kpi-unit">M€</span></div>
+      <div class="kpi-detail">Cohorte 2025 · 11 000 polices</div>
+    </div>
+    <div class="kpi kpi-bleu">
+      <div class="kpi-label">Résultat technique net</div>
+      <div class="kpi-value is-pos">+253<span class="kpi-unit">k€</span></div>
+      <div class="kpi-detail">Marge fine, fortement contrastée</div>
+    </div>
+    <div class="kpi kpi-or">
+      <div class="kpi-label">Ratio combiné global</div>
+      <div class="kpi-value">96,1<span class="kpi-unit">%</span></div>
+      <div class="kpi-detail">Sous le seuil de rentabilité</div>
+    </div>
+    <div class="kpi kpi-warn">
+      <div class="kpi-label">Boni-mali (run-off)</div>
+      <div class="kpi-value is-neg">−780<span class="kpi-unit">k€</span></div>
+      <div class="kpi-detail">Mali sur tous les exercices</div>
+    </div>
+  </div>
+
+  <h3 class="section">Architecture du projet</h3>
+  <p class="body">Le projet est structuré en six modules séquentiels, chacun produisant les données d'entrée du suivant. Cette modularité reproduit l'organisation type d'une chaîne de clôture en production.</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th style="width:8%">Module</th><th style="text-align:left;width:42%">Objet</th><th style="text-align:left">Livrable principal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>M1</strong></td><td style="text-align:left">Simulation du portefeuille MTPL avec développement temporel</td><td style="text-align:left">Triangle des paiements + vérité terrain</td></tr>
+        <tr><td><strong>M2</strong></td><td style="text-align:left">Chain-Ladder · Bornhuetter-Ferguson · Mack stochastique</td><td style="text-align:left">Ultimate et IBNR par méthode</td></tr>
+        <tr><td><strong>M3</strong></td><td style="text-align:left">Test d'adéquation des provisions IFRS 4 (LAT)</td><td style="text-align:left">UPR · DAC · URR par segment</td></tr>
+        <tr><td><strong>M4</strong></td><td style="text-align:left">Analyse boni-mali entre clôtures successives</td><td style="text-align:left">Run-off par cohorte et segment</td></tr>
+        <tr><td><strong>M5</strong></td><td style="text-align:left">Compte technique non-vie brut et net de réassurance</td><td style="text-align:left">P&amp;L avec ratios S/P et combiné</td></tr>
+        <tr><td><strong>M6</strong></td><td style="text-align:left">Pipeline rejouable et contrôles de cohérence</td><td style="text-align:left">Classeur Excel de pilotage formaté</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="callout-tag">Diagnostic central</span>
+    <div class="callout-body">Aucune analyse isolée ne fournirait une telle robustesse. C'est la cohérence mutuelle de quatre approches méthodologiquement distinctes — provisionnement stochastique, adéquation IFRS 4, boni-mali et compte technique segmenté — qui rend le diagnostic actionnable auprès du management.</div>
+  </div>
+</section>
+
+<!-- ========================================================================
+  PANEL : MODULE 1
+========================================================================= -->
+<section class="panel" id="m1">
+  <div class="panel-header">
+    <div class="panel-tag">§ M1 · Fondations</div>
+    <h2 class="panel-title">Simulation du portefeuille MTPL</h2>
+    <p class="panel-lede">Construction police par police de l'activité commerciale, de la sinistralité et du développement temporel des paiements, avec conservation de la vérité terrain pour le backtesting.</p>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="kpi"><div class="kpi-label">Polices générées</div><div class="kpi-value">50<span class="kpi-unit">000</span></div></div>
+    <div class="kpi"><div class="kpi-label">Sinistres déclarés</div><div class="kpi-value">3<span class="kpi-unit">468</span></div></div>
+    <div class="kpi"><div class="kpi-label">Fréquence empirique</div><div class="kpi-value">6,94<span class="kpi-unit">%</span></div></div>
+    <div class="kpi"><div class="kpi-label">Primes acquises totales</div><div class="kpi-value">32,7<span class="kpi-unit">M€</span></div></div>
+    <div class="kpi"><div class="kpi-label">Charge ultime vraie</div><div class="kpi-value">19,3<span class="kpi-unit">M€</span></div></div>
+    <div class="kpi"><div class="kpi-label">Écart à provisionner</div><div class="kpi-value">5,6<span class="kpi-unit">M€</span></div></div>
+  </div>
+
+  <h3 class="section">Triangle des paiements cumulés (M€)</h3>
+  <p class="body">Le triangle observable au 31/12/2025 est la matière première de tous les modules suivants. La diagonale supérieure droite (hachurée) n'est pas encore observée et fera l'objet d'une projection.</p>
+
+  <div id="triangle-display"></div>
+
+  <h3 class="section">Patterns de développement</h3>
+  <div class="chart-card">
+    <h4>Vitesse de paiement par garantie</h4>
+    <div class="chart-sub">cohorte 2021 · 5 ans observés</div>
+    <svg class="chart-svg" id="chart-patterns" viewBox="0 0 700 320"></svg>
+    <div class="legend">
+      <span><span class="legend-swatch" style="background:#1f3864"></span>Matériel — court-tail (98% à 3 ans)</span>
+      <span><span class="legend-swatch" style="background:#a23226"></span>Corporel — long-tail (queue à 12%)</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-tag">Signal intégré</span>
+    <div class="callout-body">La cohorte 2023 présente un Ultimate vrai anormalement élevé (5,38 M€) en raison de quelques sinistres corporels lourds. Cette anomalie est conservée volontairement : elle générera un mali dans le Module 4 lorsque Chain-Ladder sous-estimera initialement la charge. C'est précisément ce type de signal qu'une équipe Technical Risk Monitoring doit savoir détecter.</div>
+  </div>
+</section>
+
+<!-- ========================================================================
+  PANEL : MODULE 2
+========================================================================= -->
+<section class="panel" id="m2">
+  <div class="panel-header">
+    <div class="panel-tag">§ M2 · Provisionnement</div>
+    <h2 class="panel-title">Chain-Ladder, BF, Mack stochastique</h2>
+    <p class="panel-lede">Trois méthodes implémentées de zéro, confrontées à la vérité terrain. La méthode de Bornhuetter-Ferguson l'emporte au niveau portefeuille (−2,0 % d'écart) ; Mack stochastique met en lumière le risque de modèle sur la cohorte 2023.</p>
+  </div>
+
+  <h3 class="section">Synthèse des trois méthodes vs vérité terrain</h3>
+  <div class="grid grid-4">
+    <div class="kpi"><div class="kpi-label">Vérité terrain</div><div class="kpi-value">19,33<span class="kpi-unit">M€</span></div><div class="kpi-detail">Référence</div></div>
+    <div class="kpi kpi-warn"><div class="kpi-label">Chain-Ladder vanille</div><div class="kpi-value">18,02<span class="kpi-unit">M€</span></div><div class="kpi-detail" style="color:var(--rouge)">Biais −6,79 %</div></div>
+    <div class="kpi"><div class="kpi-label">CL + facteur de queue</div><div class="kpi-value">18,75<span class="kpi-unit">M€</span></div><div class="kpi-detail">Biais −3,00 %</div></div>
+    <div class="kpi kpi-ok"><div class="kpi-label">Bornhuetter-Ferguson</div><div class="kpi-value">18,94<span class="kpi-unit">M€</span></div><div class="kpi-detail" style="color:var(--vert)">Biais −2,03 % ← retenue</div></div>
+  </div>
+
+  <div class="chart-card" style="margin-top:2rem">
+    <h4>Ultimate par cohorte et par méthode</h4>
+    <div class="chart-sub">vs vérité terrain</div>
+    <svg class="chart-svg" id="chart-m2-bars" viewBox="0 0 800 360"></svg>
+    <div class="legend">
+      <span><span class="legend-swatch" style="background:#a23226"></span>Vérité terrain</span>
+      <span><span class="legend-swatch" style="background:#1f3864"></span>Chain-Ladder vanille</span>
+      <span><span class="legend-swatch" style="background:#4a6fa5"></span>CL + queue</span>
+      <span><span class="legend-swatch" style="background:#2d6a3e"></span>Bornhuetter-Ferguson</span>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-top:1.5rem">
+    <h4>Intervalle de confiance Mack 99,5 %</h4>
+    <div class="chart-sub">la cohorte 2023 sort de l'IC</div>
+    <svg class="chart-svg" id="chart-m2-mack" viewBox="0 0 800 320"></svg>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-tag">Constat actuariel majeur</span>
+    <div class="callout-body">L'année 2023 sort de l'intervalle de confiance à 99,5 % de Mack. La vérité terrain (5,38 M€) excède la borne supérieure Mack (4,89 M€) de 10 %, alors qu'un tel dépassement devrait se produire moins d'une fois sur deux cents. Mack capture la variance statistique des link ratios mais pas le risque de modèle — anomalie de composition du portefeuille, effet ponctuel sur la queue de distribution des sinistres corporels.</div>
+  </div>
+</section>
+
+<!-- ========================================================================
+  PANEL : MODULE 3
+========================================================================= -->
+<section class="panel" id="m3">
+  <div class="panel-header">
+    <div class="panel-tag">§ M3 · Adéquation IFRS 4</div>
+    <h2 class="panel-title">Liability Adequacy Test</h2>
+    <p class="panel-lede">Le test agrégé conclurait à tort que tout va bien. Décliné par segment comme l'impose IFRS 4, il révèle une déficience de 94 k€ sur les Particuliers, masquée au niveau global par la forte marge des Flottes.</p>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="kpi kpi-bleu">
+      <div class="kpi-label">PSAP · sinistres à payer</div>
+      <div class="kpi-value">5,17<span class="kpi-unit">M€</span></div>
+    </div>
+    <div class="kpi kpi-bleu">
+      <div class="kpi-label">UPR · primes non acquises</div>
+      <div class="kpi-value">3,59<span class="kpi-unit">M€</span></div>
+    </div>
+    <div class="kpi kpi-warn">
+      <div class="kpi-label">URR · risque en cours</div>
+      <div class="kpi-value">94<span class="kpi-unit">k€</span></div>
+      <div class="kpi-detail" style="color:var(--rouge)">À comptabiliser</div>
+    </div>
+  </div>
+
+  <h3 class="section">Test d'adéquation par segment</h3>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>Segment</th><th>UPR net</th><th>Best Estimate</th><th>Marge</th><th>URR</th><th>Test</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Flottes</td><td>1 264 726 €</td><td>850 170 €</td><td class="is-pos">+414 556 €</td><td>0 €</td><td><span class="badge ok">OK</span></td></tr>
+        <tr><td><strong>Particuliers</strong></td><td>1 785 331 €</td><td>1 878 889 €</td><td class="is-neg">−93 558 €</td><td><strong>93 558 €</strong></td><td><span class="badge alert">Deficiency</span></td></tr>
+        <tr class="tot"><td>Total</td><td>3 050 058 €</td><td>2 729 060 €</td><td>+320 998 €</td><td>93 558 €</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-card" style="margin-top:2rem">
+    <h4>UPR net vs Best Estimate</h4>
+    <div class="chart-sub">décliné par segment</div>
+    <svg class="chart-svg" id="chart-m3" viewBox="0 0 700 320"></svg>
+    <div class="legend">
+      <span><span class="legend-swatch" style="background:#1f3864"></span>UPR net de DAC (passif)</span>
+      <span><span class="legend-swatch" style="background:#a23226"></span>Best Estimate des charges futures</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-tag">Enseignement clé du LAT</span>
+    <div class="callout-body">La mutualisation des marges entre segments ne dispense pas de provisionner les segments individuellement déficitaires. Au niveau agrégé, l'UPR net (3,05 M€) dépasse largement le best estimate (2,73 M€) avec une marge positive de 321 k€. Mais déclinée par segment comme l'exige IFRS 4.15, l'analyse révèle l'insuffisance sur les Particuliers — qu'un actuaire négligent aurait manquée.</div>
+  </div>
+</section>
+
+<!-- ========================================================================
+  PANEL : MODULE 4
+========================================================================= -->
+<section class="panel" id="m4">
+  <div class="panel-header">
+    <div class="panel-tag">§ M4 · Run-off</div>
+    <h2 class="panel-title">Analyse boni-mali</h2>
+    <p class="panel-lede">Mali global de 780 k€ sur l'exercice. Cohorte 2023 disproportionnée (−9,9 %) qui matérialise la sur-sinistralité corporelle réelle, là où les autres cohortes ne portent que le biais de méthode de Chain-Ladder.</p>
+  </div>
+
+  <h3 class="section">Run-off par année de survenance</h3>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>Année</th><th>Ultimate 2024</th><th>Ultimate 2025</th><th>Boni-mali</th><th>Variation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2021</strong></td><td>2 940 776 €</td><td>3 106 128 €</td><td class="is-neg">−165 353 €</td><td class="is-neg">−5,6 %</td></tr>
+        <tr><td><strong>2022</strong></td><td>2 552 305 €</td><td>2 630 329 €</td><td class="is-neg">−78 024 €</td><td class="is-neg">−3,1 %</td></tr>
+        <tr style="background:#fbeae8 !important"><td><strong>2023</strong></td><td>4 225 982 €</td><td>4 643 653 €</td><td class="is-neg"><strong>−417 671 €</strong></td><td class="is-neg"><strong>−9,9 %</strong></td></tr>
+        <tr><td><strong>2024</strong></td><td>3 653 186 €</td><td>3 772 526 €</td><td class="is-neg">−119 340 €</td><td class="is-neg">−3,3 %</td></tr>
+        <tr class="tot"><td>Total</td><td>13 372 250 €</td><td>14 152 637 €</td><td class="is-neg">−780 387 €</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-card" style="margin-top:2rem">
+    <h4>Boni-mali par cohorte</h4>
+    <div class="chart-sub">vert = boni · rouge = mali</div>
+    <svg class="chart-svg" id="chart-m4" viewBox="0 0 700 340"></svg>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-tag">Lecture actuarielle rigoureuse</span>
+    <div class="callout-body">Il faut séparer deux phénomènes que les chiffres mélangent. <strong>Un biais structurel</strong> de Chain-Ladder vanille qui tronque le développement à la dernière colonne observée et produit un léger mali de méthode (3–5 %) à chaque clôture. <strong>Un signal de risque réel</strong> sur la cohorte 2023, dont le mali de −9,9 % est disproportionné. Un actuaire junior panique ; un actuaire expérimenté identifie la cause et propose la correction appropriée.</div>
+  </div>
+</section>
+
+<!-- ========================================================================
+  PANEL : MODULE 5
+========================================================================= -->
+<section class="panel" id="m5">
+  <div class="panel-header">
+    <div class="panel-tag">§ M5 · Pilotage</div>
+    <h2 class="panel-title">Compte technique non-vie</h2>
+    <p class="panel-lede">Ratio combiné global de 96,1 % qui masque un écart majeur : Flottes à 79,2 % (très rentables), Particuliers à 108,2 % (en perte). Onze points du combiné proviennent du run-off, pas de la sinistralité courante.</p>
+  </div>
+
+  <h3 class="section">Compte technique 2025 (€)</h3>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th style="text-align:left">Poste</th><th>Flottes</th><th>Particuliers</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>(+) Primes acquises</td><td>3 031 733</td><td>4 201 124</td><td><strong>7 232 857</strong></td></tr>
+        <tr><td>(−) Charge sinistres courant</td><td>1 301 549</td><td>2 909 373</td><td><strong>4 210 922</strong></td></tr>
+        <tr><td>(±) Boni-mali antérieurs</td><td class="is-neg">−280 940</td><td class="is-neg">−502 763</td><td class="is-neg"><strong>−783 703</strong></td></tr>
+        <tr><td>(−) Frais d'acquisition</td><td>454 760</td><td>630 169</td><td><strong>1 084 929</strong></td></tr>
+        <tr><td>(−) Frais de gestion</td><td>363 808</td><td>504 135</td><td><strong>867 943</strong></td></tr>
+        <tr style="background:var(--bg-accent) !important"><td><strong>(=) Résultat technique BRUT</strong></td><td class="is-pos"><strong>+630 676</strong></td><td class="is-neg"><strong>−345 315</strong></td><td><strong>+285 361</strong></td></tr>
+        <tr><td>Solde de réassurance</td><td>−8 716</td><td>−23 266</td><td>−31 982</td></tr>
+        <tr class="tot"><td>(=) Résultat technique NET</td><td class="is-pos">+621 961</td><td class="is-neg">−368 581</td><td class="is-pos">+253 380</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="section">Ratio combiné par segment</h3>
+  <div class="chart-card">
+    <h4>Décomposition S/P comptable + ratio de frais</h4>
+    <div class="chart-sub">seuil de rentabilité à 100 %</div>
+    <svg class="chart-svg" id="chart-m5" viewBox="0 0 700 360"></svg>
+    <div class="legend">
+      <span><span class="legend-swatch" style="background:#a23226"></span>S/P comptable</span>
+      <span><span class="legend-swatch" style="background:#1f3864"></span>Ratio de frais</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-tag">Effet du run-off</span>
+    <div class="callout-body">Le passage du S/P exercice courant (58,2 %) au S/P comptable (69,1 %) représente onze points. Sur les 96,1 % de ratio combiné total, près de onze points proviennent donc non pas de la sinistralité de l'année, mais de la correction des sous-provisions des exercices passés. Un manager qui ne regarde que le S/P courant croit le portefeuille bien plus rentable qu'il ne l'est réellement.</div>
+  </div>
+</section>
+
+<!-- ========================================================================
+  PANEL : MODULE 6
+========================================================================= -->
+<section class="panel" id="m6">
+  <div class="panel-header">
+    <div class="panel-tag">§ M6 · Industrialisation</div>
+    <h2 class="panel-title">Automatisation BAU et gouvernance</h2>
+    <p class="panel-lede">Pipeline rejouable en une commande, six contrôles de cohérence avec seuils d'alerte, classeur Excel formaté à 56 formules vivantes — zéro erreur vérifiée par recalcul LibreOffice.</p>
+  </div>
+
+  <h3 class="section">Journal des six contrôles</h3>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th>#</th><th style="text-align:left">Contrôle</th><th>Seuil</th><th>Statut</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>C1</strong></td><td style="text-align:left">IBNR positif sur toutes les cohortes</td><td>IBNR ≥ 0</td><td><span class="badge ok">OK</span></td></tr>
+        <tr><td><strong>C2</strong></td><td style="text-align:left">Réconciliation boni-mali (global vs segments)</td><td>Écart &lt; 1 %</td><td><span class="badge ok">OK · 0,42 %</span></td></tr>
+        <tr><td><strong>C3</strong></td><td style="text-align:left">Aucun mali significatif par cohorte</td><td>Mali &lt; 5 %</td><td><span class="badge alert">2021, 2023</span></td></tr>
+        <tr><td><strong>C4</strong></td><td style="text-align:left">Aucun segment en premium deficiency (LAT)</td><td>Aucun</td><td><span class="badge alert">PART</span></td></tr>
+        <tr><td><strong>C5</strong></td><td style="text-align:left">Ratio combiné global rentable</td><td>Combiné &lt; 100 %</td><td><span class="badge ok">OK · 96,1 %</span></td></tr>
+        <tr><td><strong>C6</strong></td><td style="text-align:left">Aucun segment en perte technique</td><td>Combiné &lt; 100 %</td><td><span class="badge alert">PART</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="section">Classeur Excel de pilotage</h3>
+  <p class="body">Le livrable final est un classeur formaté en sept onglets standardisés. Les ratios, totaux et tests sont des formules Excel vivantes, garantissant que le classeur se recalcule si les données source changent. Mise en forme conforme aux standards des reportings actuariels en bancassurance : police Arial, en-têtes bleu institutionnel, codes couleur conditionnels rouge/vert pour les alertes.</p>
+
+  <ul class="bullets">
+    <li><strong>0. Synthèse</strong> · indicateurs clés agrégés via références inter-onglets</li>
+    <li><strong>1. Triangle</strong> · triangle des paiements cumulés</li>
+    <li><strong>2. Provisionnement</strong> · Ultimate par méthode + IBNR, totaux en formules</li>
+    <li><strong>3. LAT IFRS 4</strong> · test par segment, UPR net et URR calculés, code couleur</li>
+    <li><strong>4. Boni-Mali</strong> · run-off par cohorte, vert / rouge automatique</li>
+    <li><strong>5. Compte technique</strong> · P&amp;L et ratios entièrement formulés</li>
+    <li><strong>6. Contrôles</strong> · journal automatique des contrôles de cohérence</li>
+  </ul>
+
+  <div class="callout">
+    <span class="callout-tag">Convergence des alertes</span>
+    <div class="callout-body">Les trois alertes détectées automatiquement (C3, C4 et C6) pointent toutes vers le même problème : le segment Particuliers, sous-provisionné sur 2023, déficitaire au LAT et en perte technique. C'est la force d'un dispositif de contrôle multi-angles : trois tests indépendants confirment le diagnostic, ce qui retire tout doute sur le caractère structurel et non accidentel du problème.</div>
+  </div>
+
+  <h3 class="section">Alignement avec la fiche de poste</h3>
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th style="text-align:left">Exigence du recruteur</th><th style="text-align:left">Module(s) répondant</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="text-align:left">Actuarial closing processes</td><td style="text-align:left">M1 + M5</td></tr>
+        <tr><td style="text-align:left">Reserve adequacy reviews</td><td style="text-align:left">M2 + M3</td></tr>
+        <tr><td style="text-align:left">Boni-mali variance analyses</td><td style="text-align:left">M4</td></tr>
+        <tr><td style="text-align:left">Quarterly technical result reporting</td><td style="text-align:left">M5</td></tr>
+        <tr><td style="text-align:left">Automate BAU processes</td><td style="text-align:left">M6</td></tr>
+        <tr><td style="text-align:left">IFRS 4-like experience</td><td style="text-align:left">M3 (LAT explicite + transition IFRS 17)</td></tr>
+        <tr><td style="text-align:left">Excel + Python</td><td style="text-align:left">M6 (classeur formaté + pipeline)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>Projet de portfolio · Étude pédagogique · Données entièrement simulées</div>
+  <div class="colophon">Composé en Source Serif &amp; IBM Plex · Mai 2026</div>
+</footer>
+
+<!-- ==========================================================================
+  SCRIPTS : navigation + génération des graphiques SVG
+========================================================================== -->
+<script>
+// ---- Navigation entre panels ---------------------------------------------
+document.querySelectorAll('nav.modules button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    document.querySelectorAll('nav.modules button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(target).classList.add('active');
+    window.scrollTo({ top: 100, behavior: 'smooth' });
+  });
+});
+
+// ---- Couleurs partagées (cohérence avec les figures Python) --------------
+const C = {
+  bleu: '#1f3864',
+  bleuClair: '#4a6fa5',
+  rouge: '#a23226',
+  vert: '#2d6a3e',
+  or: '#b08433',
+  ink: '#0f1e3a',
+  inkSoft: '#3a4660',
+  mute: '#6b7387',
+  line: '#d8d2c4',
+};
+
+// ---- Helper : crée un élément SVG ----------------------------------------
+function el(tag, attrs = {}, text = null) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== null) e.textContent = text;
+  return e;
+}
+
+// ========================================================================== //
+// TRIANGLE DES PAIEMENTS CUMULÉS (HTML grid)
+// ========================================================================== //
+(function makeTriangle() {
+  const data = [
+    [1.31, 2.12, 2.61, 2.94, 3.11],
+    [1.26, 1.91, 2.26, 2.49, null],
+    [1.79, 3.10, 3.94, null, null],
+    [1.64, 2.59, null, null, null],
+    [1.64, null, null, null, null],
+  ];
+  const annees = [2021, 2022, 2023, 2024, 2025];
+  const maxVal = 4.0;
+  const wrap = document.getElementById('triangle-display');
+  let html = '<div class="triangle-grid">';
+  html += '<div class="cell head">Surv \\ Dev</div>';
+  for (let d = 0; d < 5; d++) html += `<div class="cell head">Dev ${d}</div>`;
+  data.forEach((row, i) => {
+    html += `<div class="cell row-head">${annees[i]}</div>`;
+    row.forEach(v => {
+      if (v === null) {
+        html += '<div class="cell empty">—</div>';
+      } else {
+        const intensity = Math.min(v / maxVal, 1);
+        const bg = `rgba(31, 56, 100, ${0.08 + intensity * 0.55})`;
+        const color = intensity > 0.55 ? '#fff' : C.ink;
+        html += `<div class="cell" style="background:${bg};color:${color}">${v.toFixed(2)}</div>`;
+      }
+    });
+  });
+  html += '</div>';
+  wrap.innerHTML = html;
+})();
+
+// ========================================================================== //
+// CHART : patterns de développement (M1)
+// ========================================================================== //
+(function chartPatterns() {
+  const svg = document.getElementById('chart-patterns');
+  const W = 700, H = 320, M = { t: 20, r: 30, b: 50, l: 50 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+  // patterns théoriques injectés en M1
+  const mat = [0.70, 0.92, 0.98, 1.00, 1.00];
+  const cor = [0.20, 0.45, 0.65, 0.80, 0.88];
+  const x = i => M.l + (i / 4) * iw;
+  const y = v => M.t + (1 - v) * ih;
+
+  // grille horizontale
+  [0, 0.25, 0.5, 0.75, 1].forEach(g => {
+    svg.appendChild(el('line', { class: 'grid', x1: M.l, y1: y(g), x2: M.l + iw, y2: y(g) }));
+    svg.appendChild(el('text', { x: M.l - 8, y: y(g) + 4, 'text-anchor': 'end', class: 'label' }, `${(g*100).toFixed(0)}%`));
+  });
+  // axes
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t, x2: M.l, y2: M.t + ih, stroke: C.ink }));
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t + ih, x2: M.l + iw, y2: M.t + ih, stroke: C.ink }));
+  [0, 1, 2, 3, 4].forEach(d => {
+    svg.appendChild(el('text', { x: x(d), y: M.t + ih + 18, 'text-anchor': 'middle', class: 'label' }, `Dev ${d}`));
+  });
+  svg.appendChild(el('text', { x: M.l + iw/2, y: H - 8, 'text-anchor': 'middle' }, 'Année de développement'));
+
+  // courbes
+  function drawLine(data, color, lab) {
+    const path = data.map((v, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${y(v)}`).join(' ');
+    svg.appendChild(el('path', { d: path, stroke: color, 'stroke-width': 2.5, fill: 'none' }));
+    data.forEach((v, i) => {
+      svg.appendChild(el('circle', { cx: x(i), cy: y(v), r: 4, fill: color }));
+    });
+  }
+  drawLine(mat, C.bleu, 'Matériel');
+  drawLine(cor, C.rouge, 'Corporel');
+})();
+
+// ========================================================================== //
+// CHART : Ultimate par méthode (M2 barres groupées)
+// ========================================================================== //
+(function chartM2() {
+  const svg = document.getElementById('chart-m2-bars');
+  const W = 800, H = 360, M = { t: 30, r: 30, b: 55, l: 60 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+  // Données par cohorte (M€)
+  const cohortes = [
+    { a: 2021, vrai: 3.36, cl: 3.11, clq: 3.23, bf: 3.24 },
+    { a: 2022, vrai: 2.77, cl: 2.63, clq: 2.74, bf: 2.83 },
+    { a: 2023, vrai: 5.38, cl: 4.64, clq: 4.83, bf: 4.66 },
+    { a: 2024, vrai: 3.97, cl: 3.77, clq: 3.93, bf: 3.99 },
+    { a: 2025, vrai: 3.86, cl: 3.87, clq: 4.02, bf: 4.21 },
+  ];
+  const maxV = 6.0;
+  const y = v => M.t + ih - (v / maxV) * ih;
+  const groupW = iw / cohortes.length;
+  const barW = groupW * 0.18;
+
+  // grille
+  [0, 1, 2, 3, 4, 5, 6].forEach(g => {
+    svg.appendChild(el('line', { class: 'grid', x1: M.l, y1: y(g), x2: M.l + iw, y2: y(g) }));
+    svg.appendChild(el('text', { x: M.l - 8, y: y(g) + 4, 'text-anchor': 'end', class: 'label' }, `${g}`));
+  });
+  svg.appendChild(el('text', { x: 18, y: M.t + ih/2, transform: `rotate(-90 18 ${M.t + ih/2})`, 'text-anchor': 'middle', class: 'label' }, 'Ultimate (M€)'));
+
+  // axes
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t, x2: M.l, y2: M.t + ih, stroke: C.ink }));
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t + ih, x2: M.l + iw, y2: M.t + ih, stroke: C.ink }));
+
+  cohortes.forEach((c, i) => {
+    const x0 = M.l + i * groupW + groupW / 2;
+    const vals = [
+      { v: c.vrai, col: C.rouge },
+      { v: c.cl, col: C.bleu },
+      { v: c.clq, col: C.bleuClair },
+      { v: c.bf, col: C.vert },
+    ];
+    vals.forEach((d, j) => {
+      const offset = (j - 1.5) * (barW + 2);
+      svg.appendChild(el('rect', {
+        x: x0 + offset - barW/2, y: y(d.v), width: barW, height: M.t + ih - y(d.v),
+        fill: d.col, opacity: 0.92,
+      }));
+    });
+    svg.appendChild(el('text', { x: x0, y: M.t + ih + 18, 'text-anchor': 'middle', class: 'label' }, c.a));
+  });
+})();
+
+// ========================================================================== //
+// CHART : Mack IC 99,5 % (M2)
+// ========================================================================== //
+(function chartMack() {
+  const svg = document.getElementById('chart-m2-mack');
+  const W = 800, H = 320, M = { t: 25, r: 30, b: 50, l: 60 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+  const data = [
+    { a: 2021, cl: 3.11, se: 0.00, vrai: 3.36 },
+    { a: 2022, cl: 2.63, se: 0.027, vrai: 2.77 },
+    { a: 2023, cl: 4.64, se: 0.094, vrai: 5.38 },
+    { a: 2024, cl: 3.77, se: 0.171, vrai: 3.97 },
+    { a: 2025, cl: 3.87, se: 0.297, vrai: 3.86 },
+  ];
+  const z = 2.576;
+  const maxV = 6.0;
+  const y = v => M.t + ih - (v / maxV) * ih;
+
+  // grille
+  [0, 1, 2, 3, 4, 5, 6].forEach(g => {
+    svg.appendChild(el('line', { class: 'grid', x1: M.l, y1: y(g), x2: M.l + iw, y2: y(g) }));
+    svg.appendChild(el('text', { x: M.l - 8, y: y(g) + 4, 'text-anchor': 'end', class: 'label' }, `${g}`));
+  });
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t, x2: M.l, y2: M.t + ih, stroke: C.ink }));
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t + ih, x2: M.l + iw, y2: M.t + ih, stroke: C.ink }));
+
+  data.forEach((d, i) => {
+    const x = M.l + (i + 0.5) * (iw / data.length);
+    const low = d.cl - z * d.se;
+    const up = d.cl + z * d.se;
+    // barre d'erreur
+    svg.appendChild(el('line', { x1: x, y1: y(low), x2: x, y2: y(up), stroke: C.bleu, 'stroke-width': 2 }));
+    svg.appendChild(el('line', { x1: x - 8, y1: y(low), x2: x + 8, y2: y(low), stroke: C.bleu, 'stroke-width': 2 }));
+    svg.appendChild(el('line', { x1: x - 8, y1: y(up), x2: x + 8, y2: y(up), stroke: C.bleu, 'stroke-width': 2 }));
+    // point CL
+    svg.appendChild(el('circle', { cx: x, cy: y(d.cl), r: 5, fill: C.bleu }));
+    // croix vérité terrain
+    const cx = x, cy = y(d.vrai);
+    const outOfIC = d.vrai > up || d.vrai < low;
+    const xColor = outOfIC ? C.rouge : C.inkSoft;
+    svg.appendChild(el('line', { x1: cx-7, y1: cy-7, x2: cx+7, y2: cy+7, stroke: xColor, 'stroke-width': 2.5 }));
+    svg.appendChild(el('line', { x1: cx-7, y1: cy+7, x2: cx+7, y2: cy-7, stroke: xColor, 'stroke-width': 2.5 }));
+    if (outOfIC) {
+      svg.appendChild(el('text', { x: cx + 14, y: cy + 4, fill: C.rouge, 'font-size': 10, 'font-weight': 600 }, '→ hors IC'));
+    }
+    svg.appendChild(el('text', { x: x, y: M.t + ih + 18, 'text-anchor': 'middle', class: 'label' }, d.a));
+  });
+
+  // légende inline
+  svg.appendChild(el('circle', { cx: 70, cy: 15, r: 5, fill: C.bleu }));
+  svg.appendChild(el('text', { x: 82, y: 19 }, 'CL ± IC 99,5 % Mack'));
+  svg.appendChild(el('line', { x1: 280, y1: 8, x2: 294, y2: 22, stroke: C.rouge, 'stroke-width': 2.5 }));
+  svg.appendChild(el('line', { x1: 280, y1: 22, x2: 294, y2: 8, stroke: C.rouge, 'stroke-width': 2.5 }));
+  svg.appendChild(el('text', { x: 302, y: 19 }, 'Vérité terrain'));
+})();
+
+// ========================================================================== //
+// CHART : LAT M3
+// ========================================================================== //
+(function chartM3() {
+  const svg = document.getElementById('chart-m3');
+  const W = 700, H = 320, M = { t: 30, r: 30, b: 55, l: 60 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+  const segments = [
+    { name: 'Flottes', upr: 1.26, be: 0.85, status: 'OK' },
+    { name: 'Particuliers', upr: 1.79, be: 1.88, status: 'DEFICIENCY' },
+  ];
+  const maxV = 2.2;
+  const y = v => M.t + ih - (v / maxV) * ih;
+  const groupW = iw / segments.length;
+  const barW = groupW * 0.30;
+
+  [0, 0.5, 1, 1.5, 2].forEach(g => {
+    svg.appendChild(el('line', { class: 'grid', x1: M.l, y1: y(g), x2: M.l + iw, y2: y(g) }));
+    svg.appendChild(el('text', { x: M.l - 8, y: y(g) + 4, 'text-anchor': 'end', class: 'label' }, `${g}`));
+  });
+  svg.appendChild(el('text', { x: 18, y: M.t + ih/2, transform: `rotate(-90 18 ${M.t + ih/2})`, 'text-anchor': 'middle', class: 'label' }, 'Montant (M€)'));
+
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t, x2: M.l, y2: M.t + ih, stroke: C.ink }));
+  svg.appendChild(el('line', { class: 'axis', x1: M.l, y1: M.t + ih, x2: M.l + iw, y2: M.t + ih, stroke: C.ink }));
+
+  segments.forEach((s, i) => {
+    const x0 = M.l + i * groupW + groupW / 2;
+    svg.appendChild(el('rect', { x: x0 - barW - 4, y: y(s.upr), width: barW, height: M.t + ih - y(s.upr), fill: C.bleu }));
+    svg.appendChild(el('rect', { x: x0 + 4, y: y(s.be), width: barW, height: M.t + ih - y(s.be), fill: C.rouge }));
+    // statut
+    const yMax = Math.max(y(s.upr), y(s.be));
+    const ok = s.status === 'OK';
+    svg.appendChild(el('text', {
+      x: x0, y: Math.min(y(s.upr), y(s.be)) - 8,
+      'text-anchor': 'middle', fill: ok ? C.vert : C.rouge,
+      'font-weight': 700, 'font-size': 12, 'letter-spacing': '0.05em',
+    }, s.status));
+    svg.appendChild(el('text', { x: x0, y: M.t + ih + 18, 'text-anchor': 'middle', class: 'label' }, s.name));
+  });
+})();
+
+// ========================================================================== //
+// CHART : Boni-mali (M4)
+// ========================================================================== //
+(function chartM4() {
+  const svg = document.getElementById('chart-m4');
+  const W = 700, H = 340, M = { t: 30, r: 30, b: 55, l: 60 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+  const data = [
+    { a: 2021, bm: -165 },
+    { a: 2022, bm: -78 },
+    { a: 2023, bm: -418 },
+    { a: 2024, bm: -119 },
+  ];
+  const minV = -450, maxV = 50;
+  const y = v => M.t + ((maxV - v) / (maxV - minV)) * ih;
+
+  // grille
+  [-400, -300, -200, -100, 0].forEach(g => {
+    svg.appendChild(el('line', { class: 'grid', x1: M.l, y1: y(g), x2: M.l + iw, y2: y(g) }));
+    svg.appendChild(el('text', { x: M.l - 8, y: y(g) + 4, 'text-anchor': 'end', class: 'label' }, `${g}`));
+  });
+  // ligne zéro
+  svg.appendChild(el('line', { x1: M.l, y1: y(0), x2: M.l + iw, y2: y(0), stroke: C.ink, 'stroke-width': 1.5 }));
+  svg.appendChild(el('text', { x: 18, y: M.t + ih/2, transform: `rotate(-90 18 ${M.t + ih/2})`, 'text-anchor': 'middle', class: 'label' }, 'Boni-mali (k€)'));
+
+  const barW = iw / data.length * 0.55;
+  data.forEach((d, i) => {
+    const x = M.l + (i + 0.5) * (iw / data.length);
+    const ytop = d.bm < 0 ? y(0) : y(d.bm);
+    const h = Math.abs(y(d.bm) - y(0));
+    const color = d.bm < 0 ? C.rouge : C.vert;
+    svg.appendChild(el('rect', { x: x - barW/2, y: ytop, width: barW, height: h, fill: color, opacity: d.a === 2023 ? 1 : 0.85 }));
+    // label valeur
+    svg.appendChild(el('text', {
+      x: x, y: y(d.bm) + 14, 'text-anchor': 'middle', fill: color,
+      'font-weight': 600, 'font-size': 11,
+    }, `${d.bm > 0 ? '+' : ''}${d.bm}k`));
+    svg.appendChild(el('text', { x: x, y: M.t + ih + 18, 'text-anchor': 'middle', class: 'label' }, d.a));
+  });
+})();
+
+// ========================================================================== //
+// CHART : Ratio combiné (M5 barres empilées)
+// ========================================================================== //
+(function chartM5() {
+  const svg = document.getElementById('chart-m5');
+  const W = 700, H = 360, M = { t: 30, r: 30, b: 55, l: 60 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+  const segs = [
+    { name: 'Flottes',     sp: 52.2, fr: 27.0 },
+    { name: 'Particuliers', sp: 81.2, fr: 27.0 },
+    { name: 'Total',        sp: 69.1, fr: 27.0 },
+  ];
+  const maxV = 120;
+  const y = v => M.t + ih - (v / maxV) * ih;
+
+  [0, 20, 40, 60, 80, 100, 120].forEach(g => {
+    svg.appendChild(el('line', { class: 'grid', x1: M.l, y1: y(g), x2: M.l + iw, y2: y(g) }));
+    svg.appendChild(el('text', { x: M.l - 8, y: y(g) + 4, 'text-anchor': 'end', class: 'label' }, `${g}%`));
+  });
+  // ligne 100%
+  svg.appendChild(el('line', { x1: M.l, y1: y(100), x2: M.l + iw, y2: y(100), stroke: C.ink, 'stroke-width': 2, 'stroke-dasharray': '6 4' }));
+  svg.appendChild(el('text', { x: M.l + iw - 4, y: y(100) - 6, 'text-anchor': 'end', fill: C.ink, 'font-size': 11, 'font-weight': 600 }, 'Seuil rentabilité 100 %'));
+
+  const barW = iw / segs.length * 0.45;
+  segs.forEach((s, i) => {
+    const x = M.l + (i + 0.5) * (iw / segs.length);
+    // S/P (bas)
+    svg.appendChild(el('rect', { x: x - barW/2, y: y(s.sp), width: barW, height: M.t + ih - y(s.sp), fill: C.rouge }));
+    // Frais (haut)
+    svg.appendChild(el('rect', { x: x - barW/2, y: y(s.sp + s.fr), width: barW, height: y(s.sp) - y(s.sp + s.fr), fill: C.bleu }));
+    // label combiné
+    const tot = s.sp + s.fr;
+    const labelColor = tot >= 100 ? C.rouge : C.vert;
+    svg.appendChild(el('text', {
+      x: x, y: y(tot) - 8, 'text-anchor': 'middle',
+      fill: labelColor, 'font-weight': 700, 'font-size': 14,
+    }, `${tot.toFixed(1)}%`));
+    svg.appendChild(el('text', { x: x, y: M.t + ih + 18, 'text-anchor': 'middle', class: 'label' }, s.name));
+  });
+})();
+</script>
+
+</body>
+</html>

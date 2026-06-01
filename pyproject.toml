@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "closing-actuariel"
+version = "1.0.0"
+description = "Pipeline de clôture actuarielle non-vie (MTPL) — provisionnement, IFRS 4, boni-mali, compte technique"
+readme = "README.md"
+authors = [{name = "Steve"}]
+license = {text = "MIT"}
+requires-python = ">=3.10"
+keywords = ["actuarial", "non-life", "insurance", "IFRS4", "chain-ladder", "boni-mali", "MTPL"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1",
+]
+notebook = [
+    "jupyter>=1.0",
+    "ipykernel>=6.25",
+]
+
+[project.scripts]
+closing = "closing.run:main"
+
+[project.urls]
+Homepage = "https://github.com/steve/closing-actuariel"
+Repository = "https://github.com/steve/closing-actuariel"
+Documentation = "https://github.com/steve/closing-actuariel#readme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
