@@ -7,7 +7,7 @@ name = "closing-actuariel"
 version = "1.0.0"
 description = "Pipeline de clôture actuarielle non-vie (MTPL) — provisionnement, IFRS 4, boni-mali, compte technique"
 readme = "README.md"
-authors = [{name = "Steve"}]
+authors = [{name = "Steve G. SIMO TCHEMO"}]
 license = {text = "MIT"}
 requires-python = ">=3.10"
 keywords = ["actuarial", "non-life", "insurance", "IFRS4", "chain-ladder", "boni-mali", "MTPL"]
@@ -42,9 +42,9 @@ notebook = [
 closing = "closing.run:main"
 
 [project.urls]
-Homepage = "https://github.com/steve/closing-actuariel"
-Repository = "https://github.com/steve/closing-actuariel"
-Documentation = "https://github.com/steve/closing-actuariel#readme"
+Homepage = "https://github.com/steve-gerald/closing-actuariel"
+Repository = "https://github.com/steve-gerald/closing-actuariel"
+Documentation = "https://github.com/steve-gerald/closing-actuariel#readme"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -2,11 +2,10 @@
 
 > Pipeline complet de clôture actuarielle non-vie sur un portefeuille MTPL simulé : provisionnement stochastique, test d'adéquation IFRS 4, analyse boni-mali, compte technique et automatisation BAU.
 
-[![CI](https://img.shields.io/badge/CI-passing-brightgreen.svg)](.github/workflows/ci.yml)
+[![CI](https://github.com/steve-gerald/closing-actuariel/actions/workflows/ci.yml/badge.svg)](https://github.com/steve-gerald/closing-actuariel/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-14%20passed-brightgreen.svg)](tests/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
-[![Code style](https://img.shields.io/badge/code%20style-procedural-lightgrey.svg)]()
 
 ---
 
@@ -18,11 +17,13 @@ Six modules Python qui reproduisent l'intégralité du workflow d'une équipe **
 
 | Livrable | Lien |
 |---|---|
-| **Dashboard HTML interactif** | [`dashboard/index.html`](dashboard/index.html) — à ouvrir dans un navigateur |
+| **Dashboard HTML interactif** | [Voir en ligne](https://steve-gerald.github.io/mon_portfolio/projets/closing/) · source : [`dashboard/index.html`](dashboard/index.html) |
 | **Classeur Excel de pilotage** | [`outputs/closing_pilotage_2025.xlsx`](outputs/closing_pilotage_2025.xlsx) — 7 onglets, 56 formules vivantes |
-| **Notebook de synthèse** | [`notebooks/01_synthese.ipynb`](notebooks/01_synthese.ipynb) — exécution interactive de la chaîne |
-| **Notes techniques** | [`reports/`](reports/) — une note par module |
-| **Document de présentation** | [`reports/Closing_Actuariel_Presentation.docx`](reports/) — version Word 19 pages |
+| **Figures** | [`outputs/`](outputs/) — validation du portefeuille, méthodes de provisionnement, LAT, boni-mali, résultat technique |
+| **Notebook de synthèse** | [`notebooks/01_synthese.ipynb`](notebooks/01_synthese.ipynb) — la chaîne complète, exécutée, avec ses sorties |
+| **Notes techniques** | [`reports/`](reports/) — une note par module (liste plus bas) |
+| **Document de présentation** | [`reports/Closing_Actuariel_Presentation.docx`](reports/Closing_Actuariel_Presentation.docx) — version Word, 19 pages |
+| **Architecture** | [`docs/architecture.md`](docs/architecture.md) |
 
 ## 🚀 Quickstart
 
@@ -32,6 +33,7 @@ pip install -e ".[dev]"
 
 # 2. Lancer le pipeline complet (les six modules en séquence)
 python -m closing.run
+#    --strict : code de sortie 1 s'il y a au moins une alerte de contrôle
 
 # 3. Générer les figures matplotlib
 python scripts/generer_figures.py
@@ -149,12 +151,12 @@ Aucune dépendance à une bibliothèque actuarielle externe (`chainladder`, `lif
 
 Chaque module dispose d'une note technique dédiée dans `reports/` :
 
-- [`reports/m1_simulation.md`](reports/) — Cadre de simulation, validation
-- [`reports/m2_provisionnement.md`](reports/) — Méthodologie et backtest
-- [`reports/m3_lat_ifrs4.md`](reports/) — Test IFRS 4, transition IFRS 17
-- [`reports/m4_boni_mali.md`](reports/) — Distinction biais de méthode vs signal de risque
-- [`reports/m5_compte_technique.md`](reports/) — Compte technique et ratios
-- [`reports/m6_gouvernance.md`](reports/) — Pipeline BAU, gouvernance, four-eyes
+- [`reports/m1_simulation.md`](reports/m1_simulation.md) — Cadre de simulation, validation
+- [`reports/m2_provisionnement.md`](reports/m2_provisionnement.md) — Méthodologie et backtest
+- [`reports/m3_lat_ifrs4.md`](reports/m3_lat_ifrs4.md) — Test IFRS 4, transition IFRS 17
+- [`reports/m4_boni_mali.md`](reports/m4_boni_mali.md) — Distinction biais de méthode vs signal de risque
+- [`reports/m5_compte_technique.md`](reports/m5_compte_technique.md) — Compte technique et ratios
+- [`reports/m6_gouvernance.md`](reports/m6_gouvernance.md) — Pipeline BAU, gouvernance, four-eyes
 
 ## ⚠️ Limites assumées
 
@@ -170,10 +172,10 @@ Ces limites correspondent à des choix d'épure pédagogique et leur extension c
 
 ## 📄 Licence
 
-[MIT](LICENSE) — utilisation libre, attribution appréciée.
+[MIT](LICENSE) : utilisation libre, attribution appréciée.
 
 ## 👤 Auteur
 
-**Steve** — enseignant de mathématiques (Belgique) et Master en Sciences Actuarielles (UCLouvain, 2024), en transition vers le pricing P&C et le closing actuariel en bancassurance européenne.
+**Steve G. SIMO TCHEMO** ([portfolio](https://steve-gerald.github.io/mon_portfolio/) · [LinkedIn](https://www.linkedin.com/in/s-g-simo-tchemo/)) — enseignant de mathématiques (Belgique) et Master en Sciences Actuarielles (UCLouvain, 2024), en transition vers le pricing P&C et le closing actuariel en bancassurance européenne.
 
 Projet de portfolio destiné à démontrer la maîtrise concrète, livrable par livrable, de l'ensemble des artefacts attendus dans un poste de Closing and Risk Monitoring Actuary.

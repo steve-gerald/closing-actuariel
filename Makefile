@@ -32,7 +32,7 @@ excel:
 
 all:
 	@echo "=== Etape 1/4 : pipeline ==="
-	-$(PYTHON) -m closing.run
+	$(PYTHON) -m closing.run
 	@echo ""
 	@echo "=== Etape 2/4 : figures ==="
 	$(PYTHON) scripts/generer_figures.py
