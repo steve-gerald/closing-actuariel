@@ -17,7 +17,7 @@ Projet personnel. Les données sont entièrement simulées.
 | Figures | [`outputs/`](outputs/) |
 | Notebook de synthèse | [`notebooks/01_synthese.ipynb`](notebooks/01_synthese.ipynb), exécuté, avec ses sorties |
 | Notes techniques | [`reports/`](reports/), une par module (liste plus bas) |
-| Document de présentation | [`reports/Closing_Actuariel_Presentation.docx`](reports/Closing_Actuariel_Presentation.docx) (Word, 19 pages) |
+| Document de présentation | [`reports/Closing_Actuariel_Presentation.docx`](reports/Closing_Actuariel_Presentation.docx) (Word, 14 pages) |
 | Architecture | [`docs/architecture.md`](docs/architecture.md) |
 
 ## Lancer le projet
@@ -118,7 +118,6 @@ La charge ultime réelle de chaque cohorte est conservée, ce qui permet de test
 - Deux segments seulement (Particuliers, Flottes).
 - Pas de catastrophes ni de réassurance proportionnelle.
 - Inflation constante : pas de choc comme en 2022-2023.
-- Le document Word donne une URR de 94 k€, calculée avec une version antérieure du code ; le code actuel donne 92 795 €.
 
 ## Licence
 
