@@ -60,9 +60,8 @@
 | M5 (compte_technique) | M1 (polices), M2 (ult_bf), M4 (boni-mali par segment) |
 | M6 (controles) | M2, M3, M4, M5 (résultats agrégés) |
 
-Cette structure est strictement acyclique : aucun module amont ne dépend
-d'un module aval, ce qui garantit la reproductibilité et facilite la
-révision indépendante de chaque étape.
+Aucun module ne dépend d'un module situé après lui. On peut donc relire
+et vérifier chaque étape séparément.
 
 ## Conventions de signe
 
@@ -73,9 +72,9 @@ révision indépendante de chaque étape.
 
 ## Reproductibilité
 
-La graine aléatoire (`config.SEED = 20260527`) garantit que deux exécutions
-indépendantes produisent strictement les mêmes chiffres. C'est essentiel
-en environnement audité : tout résultat peut être rejoué et vérifié.
+La graine aléatoire (`config.SEED = 20260527`) fait que deux exécutions
+donnent exactement les mêmes chiffres. N'importe quel résultat peut être
+rejoué et vérifié.
 
 ```python
 >>> from closing.pipeline import executer_closing

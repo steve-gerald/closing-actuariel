@@ -491,7 +491,7 @@ footer .colophon{
     <span>Closing au 31/12/2025</span>
   </div>
   <h1 class="masthead-title">Closing Actuariel <span style="font-family:var(--serif);font-style:italic;font-weight:300;color:var(--ink-soft)">&amp;</span> Suivi des Risques Techniques</h1>
-  <p class="masthead-sub">Une étude complète d'un portefeuille non-vie : provisionnement, adéquation IFRS 4, boni-mali, compte technique, automatisation BAU.</p>
+  <p class="masthead-sub">La clôture 2025 d'un portefeuille RC auto simulé : provisionnement, test IFRS 4, boni-mali, compte technique et contrôles automatiques.</p>
   <div class="masthead-meta">
     <span>50 000 polices</span>
     <span>5 cohortes</span>
@@ -523,7 +523,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ 00 · Résumé exécutif</div>
     <h2 class="panel-title">Vue d'ensemble</h2>
-    <p class="panel-lede">Quatre analyses indépendantes convergent vers le même diagnostic : le segment Particuliers, cohorte 2023, est simultanément sous-provisionné, sous-tarifé et en perte technique.</p>
+    <p class="panel-lede">Quatre analyses menées séparément aboutissent au même constat : les Particuliers, cohorte 2023, sont sous-provisionnés, sous-tarifés et en perte technique.</p>
   </div>
 
   <div class="grid grid-4">
@@ -535,7 +535,7 @@ footer .colophon{
     <div class="kpi kpi-bleu">
       <div class="kpi-label">Résultat technique net</div>
       <div class="kpi-value is-pos">+253<span class="kpi-unit">k€</span></div>
-      <div class="kpi-detail">Marge fine, fortement contrastée</div>
+      <div class="kpi-detail">Marge mince, segments très inégaux</div>
     </div>
     <div class="kpi kpi-or">
       <div class="kpi-label">Ratio combiné global</div>
@@ -550,7 +550,7 @@ footer .colophon{
   </div>
 
   <h3 class="section">Architecture du projet</h3>
-  <p class="body">Le projet est structuré en six modules séquentiels, chacun produisant les données d'entrée du suivant. Cette modularité reproduit l'organisation type d'une chaîne de clôture en production.</p>
+  <p class="body">Six modules qui s'enchaînent : chacun produit les données du suivant, comme dans une chaîne de clôture réelle.</p>
 
   <div class="table-wrap">
     <table class="data">
@@ -570,7 +570,7 @@ footer .colophon{
 
   <div class="callout">
     <span class="callout-tag">Diagnostic central</span>
-    <div class="callout-body">Aucune analyse isolée ne fournirait une telle robustesse. C'est la cohérence mutuelle de quatre approches méthodologiquement distinctes — provisionnement stochastique, adéquation IFRS 4, boni-mali et compte technique segmenté — qui rend le diagnostic actionnable auprès du management.</div>
+    <div class="callout-body">Une seule analyse ne suffirait pas à convaincre. Ici, le provisionnement stochastique, le test IFRS 4, le boni-mali et le compte technique par segment disent la même chose, et c'est ce recoupement qui permet de présenter une recommandation.</div>
   </div>
 </section>
 
@@ -581,7 +581,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ M1 · Fondations</div>
     <h2 class="panel-title">Simulation du portefeuille MTPL</h2>
-    <p class="panel-lede">Construction police par police de l'activité commerciale, de la sinistralité et du développement temporel des paiements, avec conservation de la vérité terrain pour le backtesting.</p>
+    <p class="panel-lede">Les polices, les sinistres et les paiements sont simulés un par un. La charge réelle de chaque cohorte est gardée pour tester les méthodes.</p>
   </div>
 
   <div class="grid grid-3">
@@ -594,7 +594,7 @@ footer .colophon{
   </div>
 
   <h3 class="section">Triangle des paiements cumulés (M€)</h3>
-  <p class="body">Le triangle observable au 31/12/2025 est la matière première de tous les modules suivants. La diagonale supérieure droite (hachurée) n'est pas encore observée et fera l'objet d'une projection.</p>
+  <p class="body">Le triangle observable au 31/12/2025 est la matière première de tous les modules suivants. La partie hachurée, en bas à droite, n'est pas encore observée : c'est elle qu'il faut projeter.</p>
 
   <div id="triangle-display"></div>
 
@@ -610,8 +610,8 @@ footer .colophon{
   </div>
 
   <div class="callout">
-    <span class="callout-tag">Signal intégré</span>
-    <div class="callout-body">La cohorte 2023 présente un Ultimate vrai anormalement élevé (5,38 M€) en raison de quelques sinistres corporels lourds. Cette anomalie est conservée volontairement : elle générera un mali dans le Module 4 lorsque Chain-Ladder sous-estimera initialement la charge. C'est précisément ce type de signal qu'une équipe Technical Risk Monitoring doit savoir détecter.</div>
+    <span class="callout-tag">Anomalie gardée exprès</span>
+    <div class="callout-body">La cohorte 2023 présente un Ultimate vrai anormalement élevé (5,38 M€) en raison de quelques sinistres corporels lourds. Je l'ai gardée exprès : Chain-Ladder va d'abord sous-estimer cette année, et l'écart ressortira en mali dans le module 4. C'est ce genre d'écart qu'un suivi des risques techniques doit repérer.</div>
   </div>
 </section>
 
@@ -622,7 +622,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ M2 · Provisionnement</div>
     <h2 class="panel-title">Chain-Ladder, BF, Mack stochastique</h2>
-    <p class="panel-lede">Trois méthodes implémentées de zéro, confrontées à la vérité terrain. La méthode de Bornhuetter-Ferguson l'emporte au niveau portefeuille (−2,0 % d'écart) ; Mack stochastique met en lumière le risque de modèle sur la cohorte 2023.</p>
+    <p class="panel-lede">Trois méthodes codées à la main et comparées à la vérité. Bornhuetter-Ferguson est la plus juste sur l'ensemble du portefeuille (−2,0 %). Mack fait apparaître le risque de modèle sur 2023.</p>
   </div>
 
   <h3 class="section">Synthèse des trois méthodes vs vérité terrain</h3>
@@ -652,8 +652,8 @@ footer .colophon{
   </div>
 
   <div class="callout warn">
-    <span class="callout-tag">Constat actuariel majeur</span>
-    <div class="callout-body">L'année 2023 sort de l'intervalle de confiance à 99,5 % de Mack. La vérité terrain (5,38 M€) excède la borne supérieure Mack (4,89 M€) de 10 %, alors qu'un tel dépassement devrait se produire moins d'une fois sur deux cents. Mack capture la variance statistique des link ratios mais pas le risque de modèle — anomalie de composition du portefeuille, effet ponctuel sur la queue de distribution des sinistres corporels.</div>
+    <span class="callout-tag">2023 hors intervalle</span>
+    <div class="callout-body">L'année 2023 sort de l'intervalle de confiance à 99,5 % de Mack. La vérité terrain (5,38 M€) excède la borne supérieure Mack (4,89 M€) de 10 %, alors qu'un tel dépassement devrait se produire moins d'une fois sur deux cents. Mack mesure la variance des link ratios, pas le risque de modèle : ici, quelques sinistres corporels lourds concentrés sur une année.</div>
   </div>
 </section>
 
@@ -664,7 +664,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ M3 · Adéquation IFRS 4</div>
     <h2 class="panel-title">Liability Adequacy Test</h2>
-    <p class="panel-lede">Le test agrégé conclurait à tort que tout va bien. Décliné par segment comme l'impose IFRS 4, il révèle une déficience de 94 k€ sur les Particuliers, masquée au niveau global par la forte marge des Flottes.</p>
+    <p class="panel-lede">Au global, le test passe. Par segment, comme le demande IFRS 4, il fait apparaître un déficit de 93 k€ sur les Particuliers, couvert au global par la marge des Flottes.</p>
   </div>
 
   <div class="grid grid-3">
@@ -674,11 +674,11 @@ footer .colophon{
     </div>
     <div class="kpi kpi-bleu">
       <div class="kpi-label">UPR · primes non acquises</div>
-      <div class="kpi-value">3,59<span class="kpi-unit">M€</span></div>
+      <div class="kpi-value">3,60<span class="kpi-unit">M€</span></div>
     </div>
     <div class="kpi kpi-warn">
       <div class="kpi-label">URR · risque en cours</div>
-      <div class="kpi-value">94<span class="kpi-unit">k€</span></div>
+      <div class="kpi-value">93<span class="kpi-unit">k€</span></div>
       <div class="kpi-detail" style="color:var(--rouge)">À comptabiliser</div>
     </div>
   </div>
@@ -690,9 +690,9 @@ footer .colophon{
         <tr><th>Segment</th><th>UPR net</th><th>Best Estimate</th><th>Marge</th><th>URR</th><th>Test</th></tr>
       </thead>
       <tbody>
-        <tr><td>Flottes</td><td>1 264 726 €</td><td>850 170 €</td><td class="is-pos">+414 556 €</td><td>0 €</td><td><span class="badge ok">OK</span></td></tr>
-        <tr><td><strong>Particuliers</strong></td><td>1 785 331 €</td><td>1 878 889 €</td><td class="is-neg">−93 558 €</td><td><strong>93 558 €</strong></td><td><span class="badge alert">Deficiency</span></td></tr>
-        <tr class="tot"><td>Total</td><td>3 050 058 €</td><td>2 729 060 €</td><td>+320 998 €</td><td>93 558 €</td><td>—</td></tr>
+        <tr><td>Flottes</td><td>1 291 387 €</td><td>868 092 €</td><td class="is-pos">+423 295 €</td><td>0 €</td><td><span class="badge ok">OK</span></td></tr>
+        <tr><td><strong>Particuliers</strong></td><td>1 770 777 €</td><td>1 863 572 €</td><td class="is-neg">−92 795 €</td><td><strong>92 795 €</strong></td><td><span class="badge alert">Deficiency</span></td></tr>
+        <tr class="tot"><td>Total</td><td>3 062 164 €</td><td>2 731 664 €</td><td>+330 500 €</td><td>92 795 €</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
@@ -708,8 +708,8 @@ footer .colophon{
   </div>
 
   <div class="callout">
-    <span class="callout-tag">Enseignement clé du LAT</span>
-    <div class="callout-body">La mutualisation des marges entre segments ne dispense pas de provisionner les segments individuellement déficitaires. Au niveau agrégé, l'UPR net (3,05 M€) dépasse largement le best estimate (2,73 M€) avec une marge positive de 321 k€. Mais déclinée par segment comme l'exige IFRS 4.15, l'analyse révèle l'insuffisance sur les Particuliers — qu'un actuaire négligent aurait manquée.</div>
+    <span class="callout-tag">Pas de compensation entre segments</span>
+    <div class="callout-body">La marge d'un segment ne compense pas le déficit d'un autre. Au global, l'UPR net (3,06 M€) dépasse le best estimate (2,73 M€) de 331 k€. Par segment (IFRS 4.15), les Particuliers restent déficitaires et doivent être provisionnés.</div>
   </div>
 </section>
 
@@ -720,7 +720,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ M4 · Run-off</div>
     <h2 class="panel-title">Analyse boni-mali</h2>
-    <p class="panel-lede">Mali global de 780 k€ sur l'exercice. Cohorte 2023 disproportionnée (−9,9 %) qui matérialise la sur-sinistralité corporelle réelle, là où les autres cohortes ne portent que le biais de méthode de Chain-Ladder.</p>
+    <p class="panel-lede">Mali global de 780 k€ sur l'exercice. Sur 2023, le mali (−9,9 %) vient de la sur-sinistralité corporelle. Sur les autres cohortes, il vient surtout du biais de Chain-Ladder.</p>
   </div>
 
   <h3 class="section">Run-off par année de survenance</h3>
@@ -746,8 +746,8 @@ footer .colophon{
   </div>
 
   <div class="callout warn">
-    <span class="callout-tag">Lecture actuarielle rigoureuse</span>
-    <div class="callout-body">Il faut séparer deux phénomènes que les chiffres mélangent. <strong>Un biais structurel</strong> de Chain-Ladder vanille qui tronque le développement à la dernière colonne observée et produit un léger mali de méthode (3–5 %) à chaque clôture. <strong>Un signal de risque réel</strong> sur la cohorte 2023, dont le mali de −9,9 % est disproportionné. Un actuaire junior panique ; un actuaire expérimenté identifie la cause et propose la correction appropriée.</div>
+    <span class="callout-tag">Deux phénomènes</span>
+    <div class="callout-body">Les chiffres mélangent deux choses. D'un côté, Chain-Ladder sans facteur de queue s'arrête à la dernière colonne observée, ce qui crée un petit mali de méthode (3 à 5 %) à chaque clôture. De l'autre, un vrai problème sur 2023, avec un mali de −9,9 %. Le premier se corrige dans la méthode, le second demande une action sur le portefeuille.</div>
   </div>
 </section>
 
@@ -758,7 +758,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ M5 · Pilotage</div>
     <h2 class="panel-title">Compte technique non-vie</h2>
-    <p class="panel-lede">Ratio combiné global de 96,1 % qui masque un écart majeur : Flottes à 79,2 % (très rentables), Particuliers à 108,2 % (en perte). Onze points du combiné proviennent du run-off, pas de la sinistralité courante.</p>
+    <p class="panel-lede">Le ratio combiné de 96,1 % cache deux segments très différents : les Flottes à 79,2 %, les Particuliers à 108,2 %. Et onze points viennent du run-off, pas de l'exercice.</p>
   </div>
 
   <h3 class="section">Compte technique 2025 (€)</h3>
@@ -793,7 +793,7 @@ footer .colophon{
 
   <div class="callout">
     <span class="callout-tag">Effet du run-off</span>
-    <div class="callout-body">Le passage du S/P exercice courant (58,2 %) au S/P comptable (69,1 %) représente onze points. Sur les 96,1 % de ratio combiné total, près de onze points proviennent donc non pas de la sinistralité de l'année, mais de la correction des sous-provisions des exercices passés. Un manager qui ne regarde que le S/P courant croit le portefeuille bien plus rentable qu'il ne l'est réellement.</div>
+    <div class="callout-body">Le passage du S/P exercice courant (58,2 %) au S/P comptable (69,1 %) représente onze points. Sur les 96,1 % de ratio combiné total, près de onze points proviennent donc non pas de la sinistralité de l'année, mais de la correction des sous-provisions des exercices passés. À ne regarder que le S/P de l'exercice, on croit le portefeuille bien plus rentable qu'il ne l'est.</div>
   </div>
 </section>
 
@@ -804,7 +804,7 @@ footer .colophon{
   <div class="panel-header">
     <div class="panel-tag">§ M6 · Industrialisation</div>
     <h2 class="panel-title">Automatisation BAU et gouvernance</h2>
-    <p class="panel-lede">Pipeline rejouable en une commande, six contrôles de cohérence avec seuils d'alerte, classeur Excel formaté à 56 formules vivantes — zéro erreur vérifiée par recalcul LibreOffice.</p>
+    <p class="panel-lede">Une commande relance toute la clôture. Six contrôles vérifient les résultats et un classeur Excel de 56 formules les reprend, recalculé sans erreur sous LibreOffice.</p>
   </div>
 
   <h3 class="section">Journal des six contrôles</h3>
@@ -825,7 +825,7 @@ footer .colophon{
   </div>
 
   <h3 class="section">Classeur Excel de pilotage</h3>
-  <p class="body">Le livrable final est un classeur formaté en sept onglets standardisés. Les ratios, totaux et tests sont des formules Excel vivantes, garantissant que le classeur se recalcule si les données source changent. Mise en forme conforme aux standards des reportings actuariels en bancassurance : police Arial, en-têtes bleu institutionnel, codes couleur conditionnels rouge/vert pour les alertes.</p>
+  <p class="body">Le livrable final est un classeur formaté en sept onglets standardisés. Ratios, totaux et tests sont des formules Excel : si les données changent, le classeur se recalcule. Police Arial, en-têtes bleus, rouge et vert pour les alertes.</p>
 
   <ul class="bullets">
     <li><strong>0. Synthèse</strong> · indicateurs clés agrégés via références inter-onglets</li>
@@ -838,24 +838,24 @@ footer .colophon{
   </ul>
 
   <div class="callout">
-    <span class="callout-tag">Convergence des alertes</span>
-    <div class="callout-body">Les trois alertes détectées automatiquement (C3, C4 et C6) pointent toutes vers le même problème : le segment Particuliers, sous-provisionné sur 2023, déficitaire au LAT et en perte technique. C'est la force d'un dispositif de contrôle multi-angles : trois tests indépendants confirment le diagnostic, ce qui retire tout doute sur le caractère structurel et non accidentel du problème.</div>
+    <span class="callout-tag">Trois alertes, un segment</span>
+    <div class="callout-body">Les trois alertes détectées automatiquement (C3, C4 et C6) pointent toutes vers le même problème : le segment Particuliers, sous-provisionné sur 2023, déficitaire au LAT et en perte technique. Trois tests indépendants qui donnent le même diagnostic : le problème a très peu de chances d'être accidentel.</div>
   </div>
 
-  <h3 class="section">Alignement avec la fiche de poste</h3>
+  <h3 class="section">Ce que couvre le projet</h3>
   <div class="table-wrap">
     <table class="data">
       <thead>
-        <tr><th style="text-align:left">Exigence du recruteur</th><th style="text-align:left">Module(s) répondant</th></tr>
+        <tr><th style="text-align:left">Tâche de clôture</th><th style="text-align:left">Module(s)</th></tr>
       </thead>
       <tbody>
-        <tr><td style="text-align:left">Actuarial closing processes</td><td style="text-align:left">M1 + M5</td></tr>
-        <tr><td style="text-align:left">Reserve adequacy reviews</td><td style="text-align:left">M2 + M3</td></tr>
-        <tr><td style="text-align:left">Boni-mali variance analyses</td><td style="text-align:left">M4</td></tr>
-        <tr><td style="text-align:left">Quarterly technical result reporting</td><td style="text-align:left">M5</td></tr>
-        <tr><td style="text-align:left">Automate BAU processes</td><td style="text-align:left">M6</td></tr>
-        <tr><td style="text-align:left">IFRS 4-like experience</td><td style="text-align:left">M3 (LAT explicite + transition IFRS 17)</td></tr>
-        <tr><td style="text-align:left">Excel + Python</td><td style="text-align:left">M6 (classeur formaté + pipeline)</td></tr>
+        <tr><td style="text-align:left">Processus de clôture</td><td style="text-align:left">M1 + M5</td></tr>
+        <tr><td style="text-align:left">Adéquation des provisions</td><td style="text-align:left">M2 + M3</td></tr>
+        <tr><td style="text-align:left">Analyse du boni-mali</td><td style="text-align:left">M4</td></tr>
+        <tr><td style="text-align:left">Reporting du résultat technique</td><td style="text-align:left">M5</td></tr>
+        <tr><td style="text-align:left">Automatisation des tâches récurrentes</td><td style="text-align:left">M6</td></tr>
+        <tr><td style="text-align:left">Test IFRS 4</td><td style="text-align:left">M3 (LAT explicite + transition IFRS 17)</td></tr>
+        <tr><td style="text-align:left">Livrables Excel et Python</td><td style="text-align:left">M6 (classeur formaté + pipeline)</td></tr>
       </tbody>
     </table>
   </div>
@@ -864,8 +864,8 @@ footer .colophon{
 </main>
 
 <footer>
-  <div>Projet de portfolio · Étude pédagogique · Données entièrement simulées</div>
-  <div class="colophon">Composé en Source Serif &amp; IBM Plex · Mai 2026</div>
+  <div>Projet personnel · Données simulées</div>
+  <div class="colophon">Mai 2026</div>
 </footer>
 
 <!-- ==========================================================================
@@ -1095,8 +1095,8 @@ function el(tag, attrs = {}, text = null) {
   const iw = W - M.l - M.r, ih = H - M.t - M.b;
 
   const segments = [
-    { name: 'Flottes', upr: 1.26, be: 0.85, status: 'OK' },
-    { name: 'Particuliers', upr: 1.79, be: 1.88, status: 'DEFICIENCY' },
+    { name: 'Flottes', upr: 1.29, be: 0.87, status: 'OK' },
+    { name: 'Particuliers', upr: 1.77, be: 1.86, status: 'DEFICIENCY' },
   ];
   const maxV = 2.2;
   const y = v => M.t + ih - (v / maxV) * ih;

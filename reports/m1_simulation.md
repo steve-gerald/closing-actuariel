@@ -1,6 +1,6 @@
 # Module 1 — Note de validation du portefeuille simulé
 
-**Périmètre :** branche MTPL (RC automobile), portefeuille simulé sur 5 années de survenance (2021–2025), observation au 31/12/2025.
+Périmètre : branche MTPL (RC automobile), portefeuille simulé sur 5 années de survenance (2021–2025), observation au 31/12/2025.
 
 ---
 
@@ -21,11 +21,11 @@
 
 ## 2. Contrôles de cohérence
 
-> **En clair —** *Avant tout calcul de provisionnement, on vérifie que le portefeuille simulé n'a pas de comportement aberrant. Trois contrôles standards en clôture actuarielle :*
+Avant de provisionner, on vérifie que le portefeuille simulé ne se comporte pas de façon absurde. Trois contrôles :
 
 **Contrôle 1 — Fréquence théorique vs empirique.**
-Cible théorique : 0,80 × 6 % + 0,20 × 10 % = **6,80 %**.
-Empirique : **6,94 %**. Écart de +0,14 point, dans la marge d'erreur attendue pour 50 000 polices (variance Poisson).
+Cible théorique : 0,80 × 6 % + 0,20 × 10 % = 6,80 %.
+Empirique : 6,94 %. Écart de +0,14 point, dans la marge d'erreur attendue pour 50 000 polices (variance Poisson).
 
 **Contrôle 2 — Vitesse de développement.**
 Le pattern empirique observé sur la cohorte 2021 (5 ans visibles) reproduit bien les patterns théoriques injectés :
@@ -35,9 +35,9 @@ Le pattern empirique observé sur la cohorte 2021 (5 ans visibles) reproduit bie
 **Contrôle 3 — Diagonale du triangle.**
 Les paiements de l'année calendaire 2025 (diagonale du triangle) sont distribués cohéremment entre les 5 cohortes de survenance, avec une décroissance pour les cohortes anciennes (peu de paiements résiduels) et une montée pour la cohorte 2025 (paiements première année).
 
-## 3. Signal métier identifié pour les modules suivants
+## 3. Une anomalie gardée exprès
 
-> **À noter —** *La cohorte 2023 présente un Ultimate vrai anormalement élevé (5,38 M€ vs ~3,5 M€ pour les autres années). C'est dû à 2-3 sinistres corporels lourds. Cette anomalie est conservée volontairement : elle générera un **mali** en M4 lorsque Chain-Ladder, qui s'appuie sur le pattern moyen historique, sous-estimera initialement la charge ultime de cette année. C'est exactement le type de signal qu'une équipe de Technical Risk Monitoring doit détecter et expliquer au management.*
+La cohorte 2023 présente un Ultimate vrai anormalement élevé (5,38 M€ vs ~3,5 M€ pour les autres années). Deux ou trois sinistres corporels lourds suffisent à l'expliquer. Je l'ai gardée : Chain-Ladder, qui suit le pattern moyen, va sous-estimer cette année au départ, et l'écart ressortira en mali dans le module 4. C'est ce genre d'écart qu'un suivi des risques techniques doit repérer puis expliquer.
 
 ## 4. Fichiers produits
 
@@ -49,7 +49,6 @@ data/raw/
 
 data/processed/
 ├── triangle_paiements_cumules.csv           (5 × 5, sous-diagonale NaN)
-├── triangle_paiements_incrementaux.csv      (5 × 5)
 └── ultimate_vrai_par_annee.csv              (vérité terrain pour backtest)
 
 outputs/
@@ -64,11 +63,11 @@ outputs/
 - **Pas de RBNS dossier-par-dossier** : seuls les paiements sont simulés. La provision dossier-dossier sera introduite implicitement en M4 (via la décomposition boni-mali).
 - **Inflation constante 2,5 %** : pas de choc inflationniste type 2022-2023. Réaliste mais conservateur pour la suite (les méthodes de provisionnement classiques fonctionnent bien dans ce régime).
 
-## 6. Prochaine étape : Module 2 — Provisionnement
+## 6. Module suivant : Module 2 — Provisionnement
 
 Le triangle des paiements cumulés est prêt pour :
 1. **Chain-Ladder déterministe** : estimation des link ratios et projection.
 2. **Bornhuetter-Ferguson** : intégration d'un a priori de S/P.
 3. **Mack stochastique** : estimation de la variance des IBNR + intervalle de confiance 99,5 %.
 
-La vérité terrain (`ultimate_vrai_par_annee.csv`) permettra de **backtester chacune des trois méthodes** sur la cohorte 2021 (où la quasi-totalité de l'Ultimate est observé) et de diagnostiquer le biais Chain-Ladder sur la cohorte 2023 anormale.
+La vérité terrain (`ultimate_vrai_par_annee.csv`) permettra de backtester chacune des trois méthodes sur la cohorte 2021 (où la quasi-totalité de l'Ultimate est observé) et de diagnostiquer le biais Chain-Ladder sur la cohorte 2023 anormale.

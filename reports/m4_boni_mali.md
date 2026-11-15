@@ -1,20 +1,20 @@
 # Module 4 — Note technique : Analyse boni-mali
 
-**Périmètre :** mesure du résultat de run-off entre les clôtures du 31/12/2024 et du 31/12/2025, par année de survenance et par segment.
+Périmètre : mesure du résultat de run-off entre les clôtures du 31/12/2024 et du 31/12/2025, par année de survenance et par segment.
 
 ---
 
 ## 1. Synthèse exécutive
 
-Le portefeuille affiche un **mali global de run-off de −780 387 €** sur l'exercice 2025. Autrement dit, les provisions constituées au 31/12/2024 se sont révélées **insuffisantes** : l'estimation de la charge ultime a été revue à la hausse de 0,78 M€ au cours de l'année.
+Le portefeuille affiche un mali global de run-off de −780 387 € sur l'exercice 2025. Autrement dit, les provisions constituées au 31/12/2024 se sont révélées insuffisantes : l'estimation de la charge ultime a été revue à la hausse de 0,78 M€ au cours de l'année.
 
-Le mali est **concentré sur la cohorte 2023 (−418 k€, soit 54 % du mali total)** et, au sein de celle-ci, sur le **segment Particuliers (−344 k€)**.
+Le mali est concentré sur la cohorte 2023 (−418 k€, soit 54 % du mali total) et, au sein de celle-ci, sur le segment Particuliers (−344 k€).
 
-> **En clair —** *Un « boni » signifie qu'on avait trop provisionné l'an dernier : bonne nouvelle, on libère de la provision, ça améliore le résultat. Un « mali » signifie qu'on avait trop peu provisionné : il faut renforcer la provision, ça dégrade le résultat. Ici, tout est en mali : le provisionnement 2024 était globalement trop optimiste.*
+Un boni veut dire qu'on avait trop provisionné l'an dernier : on libère de la provision et le résultat s'améliore. Un mali, c'est l'inverse : il faut renforcer la provision et le résultat baisse. Ici, tout est en mali : le provisionnement 2024 était globalement trop optimiste.
 
 ## 2. Méthode
 
-On reconstruit le triangle des paiements tel qu'il était **visible à chaque date de clôture** :
+On reconstruit le triangle des paiements tel qu'il était visible à chaque date de clôture :
 - Au 31/12/2024 : triangle 4×4 (cohortes 2021-2024, en retirant la diagonale 2025).
 - Au 31/12/2025 : triangle 5×5 (cohortes 2021-2025).
 
@@ -22,7 +22,7 @@ On estime l'Ultimate Chain-Ladder à chaque date, puis :
 ```
 Boni-mali_i = Ultimate_i(clôture 2024) − Ultimate_i(clôture 2025)
 ```
-Le test ne porte que sur les **cohortes communes** (2021-2024). La cohorte 2025 est nouvelle : sa charge relève de la sinistralité de l'exercice courant, pas du run-off sur exercices antérieurs.
+Le test ne porte que sur les cohortes communes (2021-2024). La cohorte 2025 est nouvelle : sa charge relève de la sinistralité de l'exercice courant, pas du run-off sur exercices antérieurs.
 
 ## 3. Résultats par année de survenance
 
@@ -43,13 +43,11 @@ Le test ne porte que sur les **cohortes communes** (2021-2024). La cohorte 2025 
 
 Les Particuliers portent les deux tiers du mali, presque entièrement concentrés sur la cohorte 2023.
 
-## 5. Diagnostic actuariel — Deux phénomènes distincts
+## 5. Deux phénomènes à ne pas confondre
 
-> **À noter — Il faut séparer le biais de méthode du signal de risque réel.**
->
-> **(a) Biais structurel de Chain-Ladder sans facteur de queue.** Le mali « de fond » présent sur toutes les cohortes (2021, 2022, 2024) provient en grande partie du fait que Chain-Ladder vanille tronque le développement à la dernière colonne observée. À mesure qu'une cohorte gagne une année de développement supplémentaire, l'Ultimate estimé monte mécaniquement. C'est un **artefact de méthode**, pas une dérive de sinistralité. Il aurait été largement neutralisé si on avait appliqué le facteur de queue dès la clôture 2024 (comme recommandé en M2).
->
-> **(b) Signal de risque réel sur la cohorte 2023.** Le mali de −418 k€ sur 2023 est d'une ampleur **disproportionnée** (−9,9 % vs −3 à −5 % ailleurs). Il ne s'explique pas seulement par le biais de méthode : c'est la matérialisation de la sur-sinistralité corporelle déjà identifiée en M2 (vérité terrain hors IC 99,5 % de Mack). **Ce mali-là va se poursuivre** lors des prochaines clôtures.
+**(a) Biais structurel de Chain-Ladder sans facteur de queue.** Le mali « de fond » présent sur toutes les cohortes (2021, 2022, 2024) provient en grande partie du fait que Chain-Ladder vanille tronque le développement à la dernière colonne observée. À mesure qu'une cohorte gagne une année de développement supplémentaire, l'Ultimate estimé monte mécaniquement. C'est un artefact de méthode, pas une dérive de sinistralité. Il aurait été largement neutralisé si on avait appliqué le facteur de queue dès la clôture 2024 (comme recommandé en M2).
+
+**(b) Signal de risque réel sur la cohorte 2023.** Le mali de −418 k€ sur 2023 est d'une ampleur disproportionnée (−9,9 % vs −3 à −5 % ailleurs). Le biais de méthode ne suffit pas à l'expliquer : c'est la sur-sinistralité corporelle déjà repérée en M2 (vérité terrain hors IC 99,5 % de Mack). Ce mali-là va se poursuivre lors des prochaines clôtures.
 
 ## 6. Confrontation à la vérité terrain : les malis ne sont pas finis
 
@@ -60,7 +58,7 @@ Les Particuliers portent les deux tiers du mali, presque entièrement concentré
 | **2023** | 4 643 653 € | 5 378 177 € | **+734 524 €** | **Mali futur probable** |
 | 2024 | 3 772 526 € | 3 965 069 € | +192 543 € | Mali futur probable |
 
-> **Constat de pilotage majeur —** *L'estimation Chain-Ladder vanille au 31/12/2025 reste inférieure à la vérité terrain sur TOUTES les cohortes. Le portefeuille est donc encore globalement sous-provisionné de ~1,3 M€ à cette date. Si rien n'est corrigé dans la méthode, les clôtures 2026, 2027… continueront d'enregistrer des malis. La cohorte 2023 à elle seule porte +734 k€ de mali latent.*
+L'estimation Chain-Ladder vanille au 31/12/2025 reste inférieure à la vérité terrain sur toutes les cohortes. Le portefeuille est donc encore globalement sous-provisionné de ~1,3 M€ à cette date. Si rien n'est corrigé dans la méthode, les clôtures 2026, 2027… continueront d'enregistrer des malis. La cohorte 2023 à elle seule porte +734 k€ de mali latent.
 
 ## 7. Recommandations
 
@@ -76,7 +74,7 @@ Ce module recoupe et confirme les signaux des modules précédents :
 - **M2 (provisionnement)** avait identifié la cohorte 2023 hors IC 99,5 % de Mack → le mali de M4 le matérialise.
 - **M3 (LAT)** avait identifié le segment Particuliers en *premium deficiency* → le mali de M4 est porté à 64 % par ce même segment.
 
-Cette convergence de trois analyses indépendantes vers le même diagnostic (Particuliers 2023 sous-provisionné et sous-tarifé) est exactement le type de **triangulation d'indicateurs** qu'une équipe de Technical Risk Monitoring produit pour étayer une recommandation auprès du management.
+Trois analyses faites séparément arrivent au même diagnostic : les Particuliers, cohorte 2023, sont sous-provisionnés et sous-tarifés. C'est ce recoupement qui rend la recommandation défendable.
 
 ## 9. Limites
 
@@ -95,9 +93,9 @@ outputs/
 └── m4_boni_mali.png                 (figure 2-panels)
 ```
 
-## 11. Prochaine étape : Module 5 — Résultat technique
+## 11. Module suivant : Module 5 — Résultat technique
 
-Le boni-mali constitue l'une des composantes du compte technique. Le Module 5 assemblera le **P&L technique trimestriel complet** :
+Le boni-mali constitue l'une des composantes du compte technique. Le Module 5 assemblera le P&L technique trimestriel complet :
 ```
 Résultat technique = Primes acquises
                    − Charge de sinistres de l'exercice

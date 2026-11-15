@@ -1,181 +1,129 @@
-# Closing Actuariel & Suivi des Risques Techniques
-
-> Pipeline complet de clôture actuarielle non-vie sur un portefeuille MTPL simulé : provisionnement stochastique, test d'adéquation IFRS 4, analyse boni-mali, compte technique et automatisation BAU.
+# Clôture actuarielle et suivi des risques techniques
 
 [![CI](https://github.com/steve-gerald/closing-actuariel/actions/workflows/ci.yml/badge.svg)](https://github.com/steve-gerald/closing-actuariel/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-14%20passed-brightgreen.svg)](tests/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
----
+La clôture annuelle d'un portefeuille RC auto simulé, en six modules Python : provisionnement, test d'adéquation IFRS 4, boni-mali, compte technique et contrôles automatiques. Le tout tourne en une commande et produit un classeur Excel de pilotage et un dashboard HTML.
 
-## 📌 En une ligne
+Projet personnel. Les données sont entièrement simulées.
 
-Six modules Python qui reproduisent l'intégralité du workflow d'une équipe **Technical Risk Monitoring** dans un environnement de bancassurance européen, du portefeuille brut à la clôture trimestrielle pilotée par un classeur Excel formaté et un dashboard HTML interactif.
-
-## 🎯 Démo
+## Démo
 
 | Livrable | Lien |
 |---|---|
-| **Dashboard HTML interactif** | [Voir en ligne](https://steve-gerald.github.io/mon_portfolio/projets/closing/) · source : [`dashboard/index.html`](dashboard/index.html) |
-| **Classeur Excel de pilotage** | [`outputs/closing_pilotage_2025.xlsx`](outputs/closing_pilotage_2025.xlsx) — 7 onglets, 56 formules vivantes |
-| **Figures** | [`outputs/`](outputs/) — validation du portefeuille, méthodes de provisionnement, LAT, boni-mali, résultat technique |
-| **Notebook de synthèse** | [`notebooks/01_synthese.ipynb`](notebooks/01_synthese.ipynb) — la chaîne complète, exécutée, avec ses sorties |
-| **Notes techniques** | [`reports/`](reports/) — une note par module (liste plus bas) |
-| **Document de présentation** | [`reports/Closing_Actuariel_Presentation.docx`](reports/Closing_Actuariel_Presentation.docx) — version Word, 19 pages |
-| **Architecture** | [`docs/architecture.md`](docs/architecture.md) |
+| Dashboard HTML | [en ligne](https://steve-gerald.github.io/mon_portfolio/projets/closing/) · source : [`dashboard/index.html`](dashboard/index.html) |
+| Classeur Excel de pilotage | [`outputs/closing_pilotage_2025.xlsx`](outputs/closing_pilotage_2025.xlsx) (7 onglets, 56 formules) |
+| Figures | [`outputs/`](outputs/) |
+| Notebook de synthèse | [`notebooks/01_synthese.ipynb`](notebooks/01_synthese.ipynb), exécuté, avec ses sorties |
+| Notes techniques | [`reports/`](reports/), une par module (liste plus bas) |
+| Document de présentation | [`reports/Closing_Actuariel_Presentation.docx`](reports/Closing_Actuariel_Presentation.docx) (Word, 19 pages) |
+| Architecture | [`docs/architecture.md`](docs/architecture.md) |
 
-## 🚀 Quickstart
+## Lancer le projet
 
 ```bash
-# 1. Installer le package en mode editable
 pip install -e ".[dev]"
 
-# 2. Lancer le pipeline complet (les six modules en séquence)
-python -m closing.run
-#    --strict : code de sortie 1 s'il y a au moins une alerte de contrôle
+python -m closing.run              # les six modules à la suite
+python scripts/generer_figures.py  # 5 figures matplotlib
+python scripts/generer_excel.py    # classeur Excel de pilotage
+pytest tests/                      # 14 tests
 
-# 3. Générer les figures matplotlib
-python scripts/generer_figures.py
-
-# 4. Générer le classeur Excel de pilotage
-python scripts/generer_excel.py
-
-# 5. Lancer les tests unitaires
-pytest tests/
-
-# Ou tout en une commande :
-make all
+make all                           # tout d'un coup
 ```
 
-## 📊 Résultats clés de la clôture 2025
+Par défaut, `closing.run` se termine normalement même s'il y a des alertes : ce sont des résultats à analyser, pas des erreurs. Avec `--strict`, la commande renvoie le code 1 dès qu'une alerte apparaît, ce qui permet de bloquer une chaîne automatisée.
+
+## Résultats de la clôture 2025
 
 | Indicateur | Valeur |
 |---|---:|
-| Polices analysées | 50 000 |
-| Primes acquises totales | 32,7 M€ |
-| Charge ultime estimée (méthode BF) | 18,9 M€ |
-| Résultat technique net | +253 k€ |
-| **Ratio combiné global** | **96,1 %** |
+| Polices | 50 000 |
+| Primes acquises, 2021-2025 | 32,7 M€ |
+| Primes acquises, exercice 2025 | 7,23 M€ |
+| Charge ultime estimée (Bornhuetter-Ferguson) | 18,9 M€ |
+| Résultat technique net 2025 | +253 k€ |
+| Ratio combiné 2025 | 96,1 % |
 | Boni-mali sur exercices antérieurs | −780 k€ (mali) |
-| Provision pour risque en cours (URR) | 94 k€ |
-| Alertes de contrôle automatique | **3** (toutes sur le segment Particuliers) |
+| Provision pour risque en cours (URR) | 93 k€ |
+| Alertes de contrôle | 3, toutes sur les Particuliers |
 
-> **Diagnostic central :** quatre analyses méthodologiquement indépendantes (provisionnement Mack, LAT IFRS 4, boni-mali Chain-Ladder, ratio combiné segmenté) convergent vers le même constat : le segment Particuliers, cohorte 2023, est **simultanément sous-provisionné, sous-tarifé et en perte technique**.
+Quatre analyses menées séparément (provisionnement Mack, LAT IFRS 4, boni-mali, ratio combiné par segment) aboutissent au même constat : les Particuliers, cohorte 2023, sont sous-provisionnés, sous-tarifés et en perte technique.
 
-## 🏗️ Architecture
+## Les six modules
+
+| # | Module | Méthodes |
+|---|---|---|
+| M1 | Simulation du portefeuille | Poisson, lognormale, cadences de paiement |
+| M2 | Provisionnement | Chain-Ladder, facteur de queue de Sherman, Bornhuetter-Ferguson, Mack |
+| M3 | Test d'adéquation (LAT, IFRS 4) | UPR, DAC, best estimate, URR |
+| M4 | Boni-mali | Triangle N-1 reconstruit, comparaison des ultimes |
+| M5 | Compte technique | Résultat brut et net, réassurance XL, ratios |
+| M6 | Automatisation | Enchaînement des modules, 6 contrôles automatiques |
+
+Les algorithmes sont codés à la main, sans `chainladder` ni autre bibliothèque actuarielle, pour qu'on puisse suivre chaque calcul.
+
+## Organisation du dépôt
 
 ```
 closing-actuariel/
-├── src/closing/              # Package Python (cœur métier)
-│   ├── config.py             # Hyperparamètres centralisés
-│   ├── portefeuille.py       # M1 — Simulation MTPL
-│   ├── reserving.py          # M2 — Chain-Ladder, BF, Mack
-│   ├── ifrs4.py              # M3 — Liability Adequacy Test
-│   ├── boni_mali.py          # M4 — Analyse du run-off
-│   ├── compte_technique.py   # M5 — P&L technique
-│   ├── controles.py          # M6 — Contrôles de cohérence
-│   ├── pipeline.py           # Orchestrateur
-│   └── run.py                # Point d'entrée CLI
-├── scripts/                  # Générateurs de livrables
-│   ├── generer_figures.py    # 5 figures matplotlib
-│   └── generer_excel.py      # Classeur Excel formaté
-├── dashboard/                # Dashboard HTML autonome (1 fichier)
-├── notebooks/                # Notebook de synthèse
-├── tests/                    # 14 tests unitaires
-├── reports/                  # Notes techniques par module
-├── data/raw/                 # Polices, sinistres, paiements (simulés)
-├── data/processed/           # Triangles, agrégats, sorties intermédiaires
-└── outputs/                  # Figures et classeur Excel
+├── src/closing/              # le code
+│   ├── config.py             # hypothèses, au même endroit
+│   ├── portefeuille.py       # M1
+│   ├── reserving.py          # M2
+│   ├── ifrs4.py              # M3
+│   ├── boni_mali.py          # M4
+│   ├── compte_technique.py   # M5
+│   ├── controles.py          # M6
+│   ├── pipeline.py           # enchaînement des modules
+│   └── run.py                # ligne de commande
+├── scripts/                  # figures et classeur Excel
+├── dashboard/                # dashboard HTML, un seul fichier
+├── notebooks/
+├── tests/                    # 14 tests
+├── reports/                  # une note technique par module
+├── docs/
+├── data/                     # créé à l'exécution (CSV non versionnés)
+└── outputs/                  # figures et classeur Excel
 ```
 
-## 🧩 Modules
+## Code
 
-| # | Module | Méthodes implémentées |
-|---|---|---|
-| M1 | Simulation portefeuille MTPL | Poisson, Lognormale, patterns Sherman |
-| M2 | Provisionnement | Chain-Ladder, facteur de queue (Sherman), Bornhuetter-Ferguson, Mack stochastique |
-| M3 | Liability Adequacy Test (IFRS 4) | UPR · DAC · Best Estimate · URR |
-| M4 | Boni-mali | Reconstruction triangle N-1, comparaison Ultimate |
-| M5 | Compte technique non-vie | P&L brut/net, réassurance XL, ratios |
-| M6 | Automatisation BAU | Orchestration + 6 contrôles automatiques |
+Python procédural, sans classes, avec des commentaires en français et des boucles explicites. La graine aléatoire est fixée dans `config.py`, donc deux exécutions donnent les mêmes chiffres. Les tests vérifient la reproductibilité, quelques propriétés des estimateurs et le déclenchement de l'URR. La CI GitHub Actions les lance sur Python 3.10, 3.11 et 3.12.
 
-## 🎯 Alignement avec une fiche de poste *Closing and Risk Monitoring Actuary*
+## Données
 
-| Exigence type | Module(s) du projet |
-|---|---|
-| Actuarial closing processes | M1 + M5 |
-| Reserve adequacy reviews | M2 + M3 |
-| Boni-mali variance analyses | M4 |
-| Quarterly technical result reporting | M5 |
-| Automate BAU processes | M6 |
-| IFRS 4-like experience | M3 (LAT explicite + transition IFRS 17 documentée) |
-| Excel + Python | M6 (classeur formaté + pipeline complet) |
+Le portefeuille est simulé, avec des paramètres proches d'une RC auto belge :
+- 50 000 polices sur 5 ans, croissance de 5 % par an ;
+- 80 % de Particuliers, 20 % de Flottes ;
+- garanties matérielles (développement court) et corporelles (développement long) ;
+- inflation des coûts de 2,5 % par an.
 
-## 🧪 Qualité du code
+La charge ultime réelle de chaque cohorte est conservée, ce qui permet de tester les méthodes de provisionnement contre la vérité.
 
-- **Style** : Python procédural, niveau étudiant Master 2, sans POO ni patterns avancés
-- **Lisibilité** : commentaires français, docstrings systématiques, boucles explicites
-- **Tests** : 14 tests unitaires couvrant les invariants critiques (reproductibilité, propriétés des estimateurs, déclenchement de l'URR)
-- **CI** : GitHub Actions teste sur Python 3.10, 3.11 et 3.12
-- **Reproductibilité** : graine aléatoire fixée, hypothèses centralisées dans `config.py`
+## Notes techniques
 
-```bash
-$ pytest tests/
-============================== 14 passed in 3.59s ==============================
-```
+- [`reports/m1_simulation.md`](reports/m1_simulation.md) : simulation et validation du portefeuille
+- [`reports/m2_provisionnement.md`](reports/m2_provisionnement.md) : méthodes et backtest
+- [`reports/m3_lat_ifrs4.md`](reports/m3_lat_ifrs4.md) : test IFRS 4 et passage à IFRS 17
+- [`reports/m4_boni_mali.md`](reports/m4_boni_mali.md) : biais de méthode ou vrai signal de risque
+- [`reports/m5_compte_technique.md`](reports/m5_compte_technique.md) : compte technique et ratios
+- [`reports/m6_gouvernance.md`](reports/m6_gouvernance.md) : automatisation, contrôles, principe des quatre yeux
 
-## 📂 Données
+## Limites
 
-Le portefeuille analysé est **entièrement simulé** à des fins pédagogiques. Aucune référence à un portefeuille réel.
+- Exposition d'un an plein par police (pas de prorata, sauf dans M3).
+- Triangles annuels, pas trimestriels.
+- Deux segments seulement (Particuliers, Flottes).
+- Pas de catastrophes ni de réassurance proportionnelle.
+- Inflation constante : pas de choc comme en 2022-2023.
+- Le document Word donne une URR de 94 k€, calculée avec une version antérieure du code ; le code actuel donne 92 795 €.
 
-Paramètres calibrés pour reproduire le comportement d'un MTPL belge :
-- 50 000 polices sur 5 années (croissance +5 % p.a.)
-- Mix Particuliers / Flottes : 80 / 20
-- Garanties Matériel (court-tail) / Corporel (long-tail)
-- Inflation des coûts : 2,5 % p.a.
+## Licence
 
-La vérité terrain (Ultimate vrai par cohorte) est conservée afin de permettre le backtesting des méthodes de provisionnement.
+[MIT](LICENSE).
 
-## 🛠️ Stack
+## Auteur
 
-- **Langage** : Python 3.10+ (procédural)
-- **Bibliothèques** : numpy, pandas, matplotlib, openpyxl
-- **Frontend** : HTML/CSS/JS vanilla (dashboard autonome, sans framework)
-- **Tests** : pytest, pytest-cov
-- **CI/CD** : GitHub Actions
-
-Aucune dépendance à une bibliothèque actuarielle externe (`chainladder`, `lifelib`...). Tous les algorithmes (Chain-Ladder, Mack, Sherman tail factor, Bornhuetter-Ferguson) sont implémentés à la main pour la pédagogie et l'auditabilité.
-
-## 📚 Documentation
-
-Chaque module dispose d'une note technique dédiée dans `reports/` :
-
-- [`reports/m1_simulation.md`](reports/m1_simulation.md) — Cadre de simulation, validation
-- [`reports/m2_provisionnement.md`](reports/m2_provisionnement.md) — Méthodologie et backtest
-- [`reports/m3_lat_ifrs4.md`](reports/m3_lat_ifrs4.md) — Test IFRS 4, transition IFRS 17
-- [`reports/m4_boni_mali.md`](reports/m4_boni_mali.md) — Distinction biais de méthode vs signal de risque
-- [`reports/m5_compte_technique.md`](reports/m5_compte_technique.md) — Compte technique et ratios
-- [`reports/m6_gouvernance.md`](reports/m6_gouvernance.md) — Pipeline BAU, gouvernance, four-eyes
-
-## ⚠️ Limites assumées
-
-Le projet présente plusieurs limites volontairement assumées et documentées dans les notes techniques de chaque module :
-
-- Exposition annuelle pleine (pas de pro-rata de souscription en dehors de M3)
-- Granularité annuelle plutôt que trimestrielle pour les triangles
-- Segmentation à deux modalités (Particuliers / Flottes)
-- Pas de couches catastrophes ni de réassurance proportionnelle
-- Inflation constante (pas de choc inflationniste 2022-2023)
-
-Ces limites correspondent à des choix d'épure pédagogique et leur extension constitue des axes naturels de poursuite en environnement professionnel.
-
-## 📄 Licence
-
-[MIT](LICENSE) : utilisation libre, attribution appréciée.
-
-## 👤 Auteur
-
-**Steve G. SIMO TCHEMO** ([portfolio](https://steve-gerald.github.io/mon_portfolio/) · [LinkedIn](https://www.linkedin.com/in/s-g-simo-tchemo/)) — enseignant de mathématiques (Belgique) et Master en Sciences Actuarielles (UCLouvain, 2024), en transition vers le pricing P&C et le closing actuariel en bancassurance européenne.
-
-Projet de portfolio destiné à démontrer la maîtrise concrète, livrable par livrable, de l'ensemble des artefacts attendus dans un poste de Closing and Risk Monitoring Actuary.
+Steve G. SIMO TCHEMO, Master en sciences actuarielles (UCLouvain, 2024), enseignant de mathématiques en Belgique. [Portfolio](https://steve-gerald.github.io/mon_portfolio/) · [LinkedIn](https://www.linkedin.com/in/s-g-simo-tchemo/)

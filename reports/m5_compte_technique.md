@@ -1,6 +1,6 @@
 # Module 5 — Note technique : Résultat technique non-vie
 
-**Périmètre :** compte technique de l'exercice de souscription 2025, brut et net de réassurance, par segment, avec ratios de pilotage et phasage trimestriel.
+Périmètre : compte technique de l'exercice de souscription 2025, brut et net de réassurance, par segment, avec ratios de pilotage et phasage trimestriel.
 
 ---
 
@@ -12,11 +12,11 @@
 | Résultat technique net | +622 k€ | −369 k€ | **+253 k€** |
 | **Ratio combiné** | **79,2 %** | **108,2 %** | **96,1 %** |
 
-> **En clair —** *Le ratio combiné est l'indicateur roi du non-vie. En dessous de 100 %, l'activité d'assurance est rentable avant produits financiers ; au-dessus, elle perd de l'argent. Le portefeuille global est rentable (96,1 %) mais la marge est mince, et elle masque un segment Particuliers nettement déficitaire (108,2 %), porté par les Flottes très rentables (79,2 %).*
+Sous 100 % de ratio combiné, l'activité est rentable avant produits financiers ; au-dessus, elle perd de l'argent. Le portefeuille est à 96,1 %, donc rentable de peu. Ce chiffre cache des Particuliers en perte (108,2 %) que compensent des Flottes très rentables (79,2 %).
 
 ## 2. Base comptable et structure
 
-Le compte est établi en **base exercice de souscription** (underwriting year) : on rapproche la prime totale d'une cohorte de la charge ultime de cette même cohorte. C'est cohérent avec les données du projet (exposition annuelle pleine en M1).
+Le compte est établi en base exercice de souscription (underwriting year) : on rapproche la prime totale d'une cohorte de la charge ultime de cette même cohorte. C'est cohérent avec les données du projet (exposition annuelle pleine en M1).
 
 ```
 (+) Primes acquises
@@ -53,15 +53,15 @@ Le compte est établi en **base exercice de souscription** (underwriting year) :
 | Ratio de frais | 27,0 % | 27,0 % | 27,0 % |
 | **Ratio combiné** | **79,2 %** | **108,2 %** | **96,1 %** |
 
-> **À noter — L'effet du run-off sur le ratio combiné.**
->
-> Le passage du S/P courant (58,2 %) au S/P comptable (69,1 %) représente **+11 points** : c'est l'impact du mali de run-off de M4. Autrement dit, sur les 96,1 % de ratio combiné total, près de 11 points proviennent non pas de la sinistralité de l'année, mais de la correction des sous-provisions des exercices passés. **Un manager qui ne regarde que le S/P courant croit le portefeuille bien plus rentable qu'il ne l'est réellement.** C'est précisément le rôle du Closing Actuary de mettre en lumière cette distinction.
+**L'effet du run-off sur le ratio combiné.**
+
+Le passage du S/P courant (58,2 %) au S/P comptable (69,1 %) représente +11 points : c'est l'impact du mali de run-off de M4. Autrement dit, sur les 96,1 % de ratio combiné total, près de 11 points proviennent non pas de la sinistralité de l'année, mais de la correction des sous-provisions des exercices passés. À ne regarder que le S/P courant, on croit le portefeuille bien plus rentable qu'il ne l'est. Il faut présenter les deux chiffres côte à côte.
 
 ## 5. Effet de la réassurance
 
-Le traité en excédent de sinistre (XL, priorité 150 000 € par sinistre) a été touché par **2 sinistres en 2025** (un par segment, des corporels lourds). Récupérations totales : 213 k€, pour une prime cédée de 245 k€.
+Le traité en excédent de sinistre (XL, priorité 150 000 € par sinistre) a été touché par 2 sinistres en 2025 (un par segment, des corporels lourds). Récupérations totales : 213 k€, pour une prime cédée de 245 k€.
 
-Le **solde de réassurance est légèrement négatif (−32 k€)** au global : c'est le coût net du chargement réassureur (15 %). En espérance, l'assureur paie plus de prime qu'il ne récupère — c'est normal, il achète une protection contre la volatilité des gros sinistres, pas un gain espéré. Le bénéfice réel de la réassurance est la **réduction de la volatilité du résultat et du SCR** (qui sera quantifié au Module 6 / Solvabilité II le cas échéant).
+Le solde de réassurance est légèrement négatif (−32 k€) au global : c'est le coût net du chargement réassureur (15 %). En moyenne, l'assureur paie plus qu'il ne récupère, ce qui est normal : il achète une protection contre les gros sinistres, pas un gain. Le bénéfice réel de la réassurance est la réduction de la volatilité du résultat et du SCR (qui sera quantifié au Module 6 / Solvabilité II le cas échéant).
 
 ## 6. Phasage trimestriel du ratio combiné
 
@@ -72,22 +72,22 @@ Le **solde de réassurance est légèrement négatif (−32 k€)** au global : 
 | 9M | 5,42 M€ | 59,4 % | 86,4 % |
 | **FY** | 7,23 M€ | 66,1 % | **93,1 %** |
 
-> **Lecture du reporting trimestriel —** *La trajectoire descend légèrement à H1 (sinistralité courante favorable au T2), puis remonte. Le **saut visible en clôture annuelle (FY)** correspond à la reconnaissance du boni-mali : c'est en fin d'exercice que la revue annuelle des réserves matérialise le mali sur les exercices antérieurs. Ce profil — combiné « tranquille » en cours d'année puis dégradation au closing annuel — est un signal d'alerte classique : il indique que le suivi trimestriel ne capte pas la dérive des réserves anciennes. Recommandation : provisionner le run-off de manière étalée (par revue trimestrielle des triangles) plutôt que d'attendre la clôture annuelle.*
+La trajectoire descend légèrement à H1 (sinistralité courante favorable au T2), puis remonte. Le saut visible en clôture annuelle (FY) correspond à la reconnaissance du boni-mali : c'est en fin d'exercice que la revue annuelle des réserves matérialise le mali sur les exercices antérieurs. Un combiné calme en cours d'année puis une dégradation à la clôture annuelle, c'est un signal connu : le suivi trimestriel ne voit pas la dérive des réserves anciennes. Recommandation : provisionner le run-off de manière étalée (par revue trimestrielle des triangles) plutôt que d'attendre la clôture annuelle.
 
-> *Note : le ratio combiné FY du phasage (93,1 %) diffère légèrement du compte annuel détaillé (96,1 %) car le phasage applique un bruit trimestriel sur la charge courante à des fins illustratives. Dans le pipeline industrialisé (M6), les deux seront réconciliés.*
+Note : le ratio combiné FY du phasage (93,1 %) diffère légèrement du compte annuel détaillé (96,1 %) car le phasage applique un bruit trimestriel sur la charge courante à des fins illustratives. Les deux ne sont pas encore réconciliés dans le pipeline.
 
 ## 7. Recommandations
 
-1. **Action prioritaire sur les Particuliers** : ratio combiné de 108,2 %, le segment détruit de la valeur. Hausse tarifaire ciblée + révision de la segmentation. Cohérent avec le diagnostic LAT (M3) et boni-mali (M4).
-2. **Capitaliser sur les Flottes** : ratio combiné 79,2 %, fort potentiel de croissance rentable — sous réserve de maîtriser la volatilité des gros sinistres (d'où l'intérêt du traité XL).
+1. **Action prioritaire sur les Particuliers** : ratio combiné de 108,2 %, le segment perd de l'argent. Hausse tarifaire ciblée + révision de la segmentation. Cohérent avec le diagnostic LAT (M3) et boni-mali (M4).
+2. **Capitaliser sur les Flottes** : ratio combiné de 79,2 %, il y a de la place pour croître, à condition de tenir la volatilité des gros sinistres (c'est le rôle du traité XL).
 3. **Étaler la reconnaissance du run-off** : passer d'une revue annuelle à une revue trimestrielle des triangles pour éviter l'effet « mauvaise surprise » au closing FY.
 4. **Réviser la structure de réassurance** : avec seulement 2 sinistres touchant la priorité de 150 k€, évaluer si une priorité plus haute (200-250 k€) réduirait le coût net tout en conservant la protection sur les sinistres vraiment exceptionnels.
 
 ## 8. Limites
 
-> **À noter — Non-additivité du Chain-Ladder entre segments.**
->
-> Le boni-mali sommé par segment (−783 703 €) diffère légèrement du boni-mali calculé au niveau portefeuille en M4 (−780 387 €), soit un écart de 3 316 € (0,4 %). Ce n'est pas une erreur : **le Chain-Ladder n'est pas additif**. Projeter deux triangles séparés (Flottes, Particuliers) puis sommer ne donne pas exactement le même résultat que projeter le triangle agrégé, car les facteurs de développement diffèrent d'un segment à l'autre. En production, on choisit une convention (généralement la somme des projections segmentaires, plus fine) et on documente l'écart de réconciliation.
+**Non-additivité du Chain-Ladder entre segments.**
+
+Le boni-mali sommé par segment (−783 703 €) diffère légèrement du boni-mali calculé au niveau portefeuille en M4 (−780 387 €), soit un écart de 3 316 € (0,4 %). Ce n'est pas une erreur : le Chain-Ladder n'est pas additif. Projeter deux triangles séparés (Flottes, Particuliers) puis sommer ne donne pas exactement le même résultat que projeter le triangle agrégé, car les facteurs de développement diffèrent d'un segment à l'autre. En production, on choisit une convention (généralement la somme des projections segmentaires, plus fine) et on documente l'écart de réconciliation.
 
 Autres limites :
 - **Ventilation de l'ultimate BF par segment** au prorata de la charge vraie : en toute rigueur, il faudrait estimer un BF par segment (avec un a priori S/P propre à chaque segment).
@@ -98,19 +98,16 @@ Autres limites :
 
 ```
 data/processed/
-├── m5_compte_technique.csv         (compte détaillé par segment)
-└── m5_phasage_trimestriel.csv      (trajectoire Q1 → FY)
+└── m5_compte_technique.csv         (compte détaillé par segment)
 
 outputs/
 └── m5_resultat_technique.png       (figure 2-panels)
 ```
 
-## 10. Prochaine étape : Module 6 — Automatisation BAU
+## 10. Module suivant : Module 6 — Automatisation BAU
 
-Le Module 6 industrialisera l'ensemble de la chaîne (M1 → M5) en un **pipeline rejouable** à chaque clôture, avec :
+Le module 6 enchaîne M1 à M5 en un pipeline qu'on relance à chaque clôture, avec :
 - orchestration des scripts,
 - contrôles de cohérence automatiques (réconciliations, seuils d'alerte),
-- export d'un **classeur Excel de pilotage formaté** (onglets standardisés : triangle, provisions, LAT, boni-mali, compte technique),
+- export d'un classeur Excel de pilotage formaté (onglets standardisés : triangle, provisions, LAT, boni-mali, compte technique),
 - note de gouvernance (qui valide quoi, fréquence, principe des quatre yeux).
-
-C'est le livrable qui répond directement à la ligne « automate and streamline BAU processes » de la fiche de poste.
